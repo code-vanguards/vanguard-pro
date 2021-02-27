@@ -14,7 +14,9 @@
   <section id="left-panel">
     <h2>Projects List</h2>
     <div class="projects-list">
-
+      <ul>
+        <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
+      </ul>
     </div>
   </section>
   <section id="tasks-area">
@@ -23,14 +25,13 @@
       Add Task
     </div>
     <ul class="tasks-list">
-      <li>
-        This is a task
-      </li>
-      <li>
-        This is a task
-      </li>
-      <li>
-        This is a task
+      <li v-for="task in tasks"
+      :key="task.id">
+        Name: {{ task.name }}
+        Comment: {{task.comment}}
+        Gems: {{ task.gemsWorth }}
+        Due Date: {{ task.dueDate }}
+        Project: {{ task.project.name }}
       </li>
     </ul>
     <!-- GameTracker -->
@@ -38,7 +39,81 @@
 </template>
 
 <script>
-export default {};
+
+// Creates new tasks objects. Makes it easier and keeps objects consistent.
+function taskFactory(name, comment, dueDate, project, gemsWorth, isCompleted=false, id=generateId(0,1000000)) {
+  return {
+    id,
+    name,
+    comment,
+    dueDate,
+    project,
+    isCompleted,
+    gemsWorth
+  };
+}
+
+// Creates new project objects. Makes it easier and keeps objects consistent.
+function projectFactory(name, id=generateId(0,1000)) {
+  return {
+    id,
+    name: name.toLowerCase(),
+  };
+}
+
+function generateId(min, max) {
+  return Math.floor((Math.random() * (max - min)) + min);
+}
+
+// Export App
+export default {
+  data() {
+    return {
+      stats: {
+        uncompletedTasks: 0,
+        completedTasks: 0,
+        gems: 0,
+      },
+      projects: [
+        projectFactory('School'),
+        projectFactory('Work'),
+      ],
+      tasks: [
+        taskFactory(
+          'Buy Groceries',
+          'Go to Canadian Superstore and buy bananas.',
+          new Date().toISOString(),
+          projectFactory('Chores'),
+          10
+        ),
+        taskFactory(
+          'Pay Bills',
+          'Pay Electric and Credit Card',
+          new Date().toISOString(),
+          projectFactory('Chores'),
+          5
+        ),
+      ],
+    };
+  },
+  methods: {
+  },
+  computed: {
+  },
+  watch: {
+    /*
+    tasks(value) {
+      console.log('In tasks watcher...');
+      this.projects = value.map(task => {
+        if (!this.projects.some(project => task.project.id === project.id)) { // False, if project doesn't exist
+          console.log(`Project ID not found ${task.project.id}.`);
+          return { projectFactory(task.project.name, task.project.id);
+        }
+      });
+    },
+    */
+  },
+};
 </script>
 
 <style>
