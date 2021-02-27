@@ -8,7 +8,7 @@
       StatCounters
     </div>
     <div>
-      DateDisplay
+      <date-display></date-display>
     </div>
   </header>
   <section id="left-panel">
