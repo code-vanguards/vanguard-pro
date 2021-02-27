@@ -39,33 +39,8 @@
 </template>
 
 <script>
+import { taskFactory, projectFactory } from './lib/factories.js';
 
-// Creates new tasks objects. Makes it easier and keeps objects consistent.
-function taskFactory(name, comment, dueDate, project, gemsWorth, isCompleted=false, id=generateId(0,1000000)) {
-  return {
-    id,
-    name,
-    comment,
-    dueDate,
-    project,
-    isCompleted,
-    gemsWorth
-  };
-}
-
-// Creates new project objects. Makes it easier and keeps objects consistent.
-function projectFactory(name, id=generateId(0,1000)) {
-  return {
-    id,
-    name: name.toLowerCase(),
-  };
-}
-
-function generateId(min, max) {
-  return Math.floor((Math.random() * (max - min)) + min);
-}
-
-// Export App
 export default {
   data() {
     return {
