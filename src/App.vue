@@ -13,13 +13,27 @@
   </header>
   <section id="left-panel">
     <h2>Projects List</h2>
-    <!-- ProjectsList -->
+    <div class="projects-list">
+
+    </div>
   </section>
   <section id="tasks-area">
     <div class="new-task">
+      <!-- NewTask-->
       Add Task
     </div>
-    <!-- NewTask, TaskInfo, GameTracker -->
+    <ul class="tasks-list">
+      <li>
+        This is a task
+      </li>
+      <li>
+        This is a task
+      </li>
+      <li>
+        This is a task
+      </li>
+    </ul>
+    <!-- GameTracker -->
   </section>
 </template>
 
@@ -101,5 +115,15 @@ h2 { font-size: 1.4rem; }
   width: 50rem;
   height: 5rem;
   text-align: center;
+  margin-bottom: 4rem;
+}
+
+.tasks-list {
+  list-style: none;
+}
+
+.tasks-list li {
+  border-bottom: 2px solid #c3c3c3;
+  margin-bottom: 1rem;
 }
 </style>
