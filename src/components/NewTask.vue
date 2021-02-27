@@ -4,14 +4,14 @@
       <h3>Add Task</h3>
       <div class="dropdown-container">
         <div class="dropdown-wrapper">
-          <img src="../assets/053-speech-bubble.png" class="img-btn" @click="toggleCommentDropdown" />
+          <img title="Add Comment" src="../assets/053-speech-bubble.png" class="img-btn" @click="toggleCommentDropdown" />
           <div class="dropdown-content" v-show="isCommentDropdownVisible">
             <input type="text" v-model="task.comment" />
             <button @click="toggleCommentDropdown">Ok</button>
           </div>
         </div>
         <div class="dropdown-wrapper">
-          <img src="../assets/023-archive.png" class="img-btn" @click="toggleProjectDropdown" />
+          <img title="Add Project" src="../assets/023-archive.png" class="img-btn" @click="toggleProjectDropdown" />
           <div class="dropdown-content" v-show="isProjectDropdownVisible">
             <input type="text" v-model="task.project" />
             <button @click="toggleProjectDropdown">Ok</button>
