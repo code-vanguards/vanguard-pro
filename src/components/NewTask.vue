@@ -4,20 +4,19 @@
       <h3>Add Task</h3>
       <div class="dropdown-container">
         <div class="dropdown-wrapper">
-          <button @click="toggleCommentDropdown">Comment</button>
+          <img src="../assets/053-speech-bubble.png" class="img-btn" @click="toggleCommentDropdown" />
           <div class="dropdown-content" v-show="isCommentDropdownVisible">
             <input type="text" v-model="task.comment" />
             <button @click="toggleCommentDropdown">Ok</button>
           </div>
         </div>
         <div class="dropdown-wrapper">
-          <button @click="toggleProjectDropdown">Project</button>
+          <img src="../assets/023-archive.png" class="img-btn" @click="toggleProjectDropdown" />
           <div class="dropdown-content" v-show="isProjectDropdownVisible">
             <input type="text" v-model="task.project" />
             <button @click="toggleProjectDropdown">Ok</button>
           </div>
         </div>
-        <p>icon3</p>
       </div>
     </header>
     <form @submit.prevent="addTask">
@@ -96,7 +95,7 @@ input {
   background: #f0f0f0;
 }
 
-button {
+form button {
   border-radius: 3px;
   width: 4rem;
   padding: 5px;
@@ -114,7 +113,13 @@ button {
 .dropdown-content {
   position: absolute;
   background-color: black;
+  padding: 10px;
   width: 10rem;
+  right: 0;
+}
+
+.comment-dropdown-btn {
+
 }
 
 form {

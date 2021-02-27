@@ -161,6 +161,11 @@ h2 { font-size: 1.4rem; }
   padding: 2rem;
 }
 
+.img-btn {
+  width: 32px;
+  cursor: pointer;
+}
+
 .tasks-list {
   list-style: none;
 }
