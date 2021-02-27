@@ -27,7 +27,7 @@
       <li v-for="task in tasks"
       :key="task.id">
         Name: {{ task.name }}
-        Comment: {{task.comment}}
+        Comment: {{ task.comment}}
         Gems: {{ task.gemsWorth }}
         Due Date: {{ task.dueDate }}
         Project: {{ task.project.name }}
@@ -72,23 +72,24 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.tasks.push(taskFactory(task));
+      this.tasks.push(taskFactory(task.name, undefined, task.comment));
     },
   },
-  computed: {
-  },
   watch: {
-    /*
-    tasks(value) {
+    tasks() {
       console.log('In tasks watcher...');
+      /*
       this.projects = value.map(task => {
         if (!this.projects.some(project => task.project.id === project.id)) { // False, if project doesn't exist
           console.log(`Project ID not found ${task.project.id}.`);
-          return { projectFactory(task.project.name, task.project.id);
+          return projectFactory({
+            name: task.project.name,
+            id: task.project.id
+          });
         }
       });
+      */
     },
-    */
   },
 };
 </script>

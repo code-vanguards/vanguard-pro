@@ -2,14 +2,26 @@
   <div class='add-task'>
     <header>
       <h3>Add Task</h3>
-      <div class="dropdown-wrapper">
-        <p>icon1</p>
-        <p>icon2</p>
+      <div class="dropdown-container">
+        <div class="dropdown-wrapper">
+          <button @click="toggleCommentDropdown">Comment</button>
+          <div class="dropdown-content" v-show="isCommentDropdownVisible">
+            <input type="text" v-model="task.comment" />
+            <button @click="toggleCommentDropdown">Ok</button>
+          </div>
+        </div>
+        <div class="dropdown-wrapper">
+          <button @click="toggleProjectDropdown">Project</button>
+          <div class="dropdown-content" v-show="isProjectDropdownVisible">
+            <input type="text" v-model="task.project" />
+            <button @click="toggleProjectDropdown">Ok</button>
+          </div>
+        </div>
         <p>icon3</p>
       </div>
     </header>
     <form @submit.prevent="addTask">
-      <input type="text" v-model="taskInput"/>
+      <input type="text" @click="hideDropdowns" v-model="task.name"/>
       <button>Add</button>
     </form>
   </div>
@@ -20,16 +32,40 @@ export default {
   emits: ['add-task'],
   data() {
     return {
-      taskInput: '',
+      task: {
+        name: '',
+        comment: '',
+        project: '',
+      },
+      isCommentDropdownVisible: false,
+      isProjectDropdownVisible: false,
     };
   },
   methods: {
     addTask() {
-      if (this.taskInput) {
-        this.$emit('add-task', this.taskInput);
-        this.taskInput = '';
+      if (this.task.name) {
+        this.$emit('add-task', this.task);
+        this.task.name = '';
+        this.task.comment = '';
+        this.hideDropdowns();
+      } else {
+        alert('Please enter a task.');
       }
     },
+    hideDropdowns() {
+      this.isProjectDropdownVisible = false;
+      this.isCommentDropdownVisible = false;
+    },
+    toggleCommentDropdown() {
+      this.isCommentDropdownVisible = !this.isCommentDropdownVisible;
+      this.isProjectDropdownVisible = false;
+    },
+    toggleProjectDropdown() {
+      this.isProjectDropdownVisible = !this.isProjectDropdownVisible;
+      this.isCommentDropdownVisible = false;
+    },
+  },
+  computed: {
   },
 };
 </script>
@@ -38,6 +74,7 @@ export default {
 .add-task {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  color: #f0f0f0;
   margin: auto;
   padding: 12px;
   width: 50rem;
@@ -56,6 +93,7 @@ input {
   border-style: none;
   width: 80%;
   padding: 3px;
+  background: #f0f0f0;
 }
 
 button {
@@ -64,8 +102,19 @@ button {
   padding: 5px;
 }
 
-.dropdown-wrapper {
+.dropdown-container {
+  margin-right: 8rem;
   display: flex;
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: black;
+  width: 10rem;
 }
 
 form {
