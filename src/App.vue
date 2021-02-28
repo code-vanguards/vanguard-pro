@@ -5,7 +5,10 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
-      <stat-counters></stat-counters>
+      <!--Code for the counters-->
+      <stat-counters
+        :stat="stats"
+      ></stat-counters>
     </div>
     <div>
       <date-display></date-display>
@@ -80,6 +83,8 @@ export default {
         foundProject,
         task.gems
       ));
+      this.stats.uncompletedTasks+=1;
+
     },
     addProject(projectName) {
       if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
@@ -91,6 +96,9 @@ export default {
     completeTask(taskId) {
       const theTask = this.tasks.find(task => task.id === taskId);
       theTask.isCompleted = true;
+      this.stats.completedTasks +=1;
+      this.stats.uncompletedTasks-=1;
+      this.stats.gems+= Number(theTask.gems);
     },
   },
   watch: {
