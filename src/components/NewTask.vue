@@ -17,17 +17,14 @@
             <button @click="toggleCommentDropdown">Ok</button>
           </div>
         </div>
-        <div class="dropdown-wrapper">
-          <img title="Add Project" src="../assets/023-archive.png" class="img-btn" @click="toggleProjectDropdown" />
-          <div class="dropdown-content" v-show="isProjectDropdownVisible">
-            <input type="text" v-model="task.projectName" />
-            <button @click="toggleProjectDropdown">Ok</button>
-          </div>
-        </div>
       </div>
     </header>
     <form @submit.prevent="addTask">
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
+      <select v-model="task.ProjectName">
+        <option disabled selected>Select a Project</option>
+        <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
+      </select>
       <button>Add</button>
     </form>
   </div>
@@ -36,6 +33,7 @@
 <script>
 export default {
   emits: ['add-task'],
+  props: ['projects'],
   data() {
     return {
       task: {
@@ -45,7 +43,6 @@ export default {
         gems: 0,
       },
       isCommentDropdownVisible: false,
-      isProjectDropdownVisible: false,
       isGemDropdownVisible: false,
     };
   },
@@ -63,23 +60,15 @@ export default {
       }
     },
     hideDropdowns() {
-      this.isProjectDropdownVisible = false;
       this.isCommentDropdownVisible = false;
       this.isGemDropdownVisible = false;
     },
     toggleCommentDropdown() {
       this.isCommentDropdownVisible = !this.isCommentDropdownVisible;
-      this.isProjectDropdownVisible = false;
-      this.isGemDropdownVisible = false;
-    },
-    toggleProjectDropdown() {
-      this.isProjectDropdownVisible = !this.isProjectDropdownVisible;
-      this.isCommentDropdownVisible = false;
       this.isGemDropdownVisible = false;
     },
     toggleGemDropdown() {
       this.isGemDropdownVisible = !this.isGemDropdownVisible;
-      this.isProjectDropdownVisible = false;
       this.isCommentDropdownVisible = false;
     }
   },
@@ -92,7 +81,7 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   color: #f0f0f0;
   margin: auto;
-  padding: 12px;
+  padding: 12px 30px;
   width: 50rem;
   text-align: center;
   margin-bottom: 4rem;
@@ -101,15 +90,20 @@ export default {
 
 header {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
 
 input {
   border-radius: 5px;
   border-style: none;
-  width: 80%;
+  width: 70%;
   padding: 3px;
   background: #f0f0f0;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
 }
 
 form button {
@@ -130,7 +124,7 @@ form button:active {
 }
 
 .dropdown-container {
-  margin-right: 8rem;
+  margin-left: 1.5rem;
   display: flex;
   align-items: center;
 }
@@ -151,9 +145,6 @@ form button:active {
   right: 0;
 }
 
-.dropdown-content input {
-}
-
 .dropdown-content textarea {
   resize: none;
   width: 80%;
@@ -163,13 +154,17 @@ form button:active {
   width: 30%;
 }
 
-form {
-  display: flex;
-  justify-content: space-around;
-}
-
 #gems-img {
   width: 16px;
   margin-right: 3px;
+}
+
+select {
+  appearance: none;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+  border: none;
+  outline: none;
+  color: black;
 }
 </style>
