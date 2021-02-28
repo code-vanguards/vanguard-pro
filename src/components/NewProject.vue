@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="$emit('add-project', projectName)">
+  <form @submit.prevent="addProject">
     <label class="formItem">Add project</label>
     <input class="formItem" type="text" v-model="projectName"/>
     <button class="formItem">Add</button>
@@ -14,6 +14,16 @@ export default {
       projectName: '',
     };
   },
+  methods: {
+    addProject() {
+      if (this.projectName) {
+        this.$emit('add-project', this.projectName);
+        this.projectName = '';
+      } else {
+        alert('Please enter a name for the project.');
+      }
+    },
+  }
 };
 </script>
 
