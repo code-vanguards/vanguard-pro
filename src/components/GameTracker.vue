@@ -12,13 +12,12 @@ export default {
   methods:{
     
     startSteam(){
-      console.log('snoopingas')
       this.retrieveInfo();
-      setInterval(this.retrieveInfo,10000);//300000);
+      setInterval(this.retrieveInfo,150000);//300000);
     },
     retrieveInfo(){
-      
-      console.log('its working');
+      const debug = false;
+      //console.log('its working');
 
       
 
@@ -74,47 +73,28 @@ export default {
       request.send();
       
       request.onload = () => {
-        console.log(request);
+        //console.log(request);
         if(request.status === 200) { //if request was a success
-          //console.log(JSON.parse(request.response));
-          console.log('request to steam user is a success');
-          //const htmlString = request.response;
-          //console.log(htmlString.search('profile_in_game_header'));
+          //console.log('request to steam user is a success');
 
           let str = request.response;
           let doc = new DOMParser().parseFromString(str, "text/html");
-          //console.log(doc.getElementsByClassName('profile_in_game_header'));
           let e = doc.getElementsByClassName('profile_in_game_header');
-          //console.log(e);
-          console.log(e.item(0)); 
+          //console.log(e.item(0)); 
           const userStatus = e.item(0).innerHTML;
-          //if(userStatus.)
-
-          //var frs = '';
           if( userStatus.includes('Currently In-Game'))
           {
-            console.log('USER IS IN A GAME');
+            if (debug) console.log('USER IS IN A GAME');
           }
           else{
-            console.log('USER IS NOT IN A GAME');
+            if (debug) console.log('USER IS NOT IN A GAME');
           }
-          //const list = document.getElementsByClassName('profile_in_game_header');
-          //list.getElementsByClassName()
-          //console.log(list.length);
 
         }else{
           console.log(`error ${request.status} ${request.statusText}`);
         }
 
       }
-
-      
-      //const e = "";
-    
-
-      //request.response
-
-
     },
   },
 
