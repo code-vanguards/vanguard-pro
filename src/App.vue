@@ -7,7 +7,7 @@
     <div>
       <!--Code for the counters-->
       <stat-counters
-        :stat ="stats"
+        :stat="stats"
       ></stat-counters>
     </div>
     <div>
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       //look for when the task is complete, not complete(total tasks - complete tasks) and gems/coins
-      //useing taskFactory gem, isCompleted, total tasks
+      //using taskFactory gem = 5, isCompleted, total tasks
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
@@ -100,6 +100,10 @@ export default {
           task.gems
         ));
       }
+      this.stats.gems += Number(task.gems);
+      this.stats.uncompletedTasks+=1;
+      console.log(this.stats.gems);
+      console.log(this.stats.uncompletedTasks);
     },
   },
   watch: {

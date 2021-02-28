@@ -1,10 +1,10 @@
 <template>
   <span>
-    <!--<img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>-->
+    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
     {{stat.uncompletedTasks}} uncompleted
-    <!--<img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>-->
+    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
     {{stat.completedTasks}} completed
-    <!--<img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>-->
+    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
     {{stat.gems}} gems
   </span>
 
@@ -25,4 +25,7 @@ export default {
 </script>
 
 <style scoped>
+img{
+  width:24px;
+}
 </style>
