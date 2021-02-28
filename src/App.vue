@@ -5,7 +5,10 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
-      StatCounters
+      <!--Code for the counters-->
+      <stat-counters
+        :stat ="stats"
+      ></stat-counters>
     </div>
     <div>
       <date-display></date-display>
@@ -43,6 +46,8 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 export default {
   data() {
     return {
+      //look for when the task is complete, not complete(total tasks - complete tasks) and gems/coins
+      //useing taskFactory gem, isCompleted, total tasks
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
