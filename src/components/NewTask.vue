@@ -6,7 +6,7 @@
         <div class="dropdown-wrapper">
           <img id="gems-img" title="Add Gems" src="../assets/197-diamond.png" class="img-btn" @click="toggleGemDropdown" />
           <div class="dropdown-content" v-show="isGemDropdownVisible">
-            <input type="number" v-model="task.gems" />
+            <input type="number" min="0" v-model="task.gems" />
             <button @click="toggleGemDropdown">Ok</button>
           </div>
         </div>
