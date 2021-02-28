@@ -5,7 +5,7 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
-      StatCounters
+      <stat-counters></stat-counters>
     </div>
     <div>
       <date-display></date-display>
@@ -34,6 +34,7 @@
       </li>
     </ul>
     <!-- GameTracker -->
+    <game-tracker></game-tracker>
   </section>
 </template>
 
