@@ -14,6 +14,9 @@
   <section id="left-panel">
     <h2>Projects List</h2>
     <div class="projects-list">
+      <new-project
+        @add-project="addProject"
+      ></new-project>
       <ul>
         <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
       </ul>
@@ -95,6 +98,9 @@ export default {
           task.gems
         ));
       }
+    },
+    addProject(projectName) {
+      this.projects.push(projectFactory(projectName));
     },
   },
   watch: {
@@ -195,5 +201,9 @@ h2 { font-size: 1.4rem; }
 .tasks-list li {
   border-bottom: 2px solid #c3c3c3;
   margin-bottom: 1rem;
+}
+
+.projects-list {
+  width: 100%;
 }
 </style>
