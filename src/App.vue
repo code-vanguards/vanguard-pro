@@ -38,6 +38,7 @@
         v-for="task in tasks"
         :key="task.id"
         :task="task"
+        :projects="projects"
         @complete-task="completeTask"
       ></task-info>
     </ul>

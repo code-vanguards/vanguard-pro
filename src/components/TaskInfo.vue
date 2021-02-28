@@ -19,7 +19,7 @@ export default {
   props: ['task', 'projects'],
   data() {
     return {
-
+      
     };
   },
   methods: {
