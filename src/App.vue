@@ -83,6 +83,8 @@ export default {
         foundProject,
         task.gems
       ));
+      this.stats.uncompletedTasks+=1;
+
     },
     addProject(projectName) {
       if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
@@ -90,14 +92,13 @@ export default {
       } else {
         this.projects.push(projectFactory(projectName));
       }
-      this.stats.gems += Number(task.gems);
-      this.stats.uncompletedTasks+=1;
-      console.log(this.stats.gems);
-      console.log(this.stats.uncompletedTasks);
     },
     completeTask(taskId) {
       const theTask = this.tasks.find(task => task.id === taskId);
       theTask.isCompleted = true;
+      this.stats.completedTasks +=1;
+      this.stats.uncompletedTasks-=1;
+      this.stats.gems+= Number(theTask.gems);
     },
   },
   watch: {
