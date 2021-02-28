@@ -83,8 +83,6 @@ export default {
       this.isCommentDropdownVisible = false;
     }
   },
-  computed: {
-  },
 };
 </script>
 
@@ -158,6 +156,7 @@ form button:active {
 
 .dropdown-content textarea {
   resize: none;
+  width: 80%;
 }
 
 .dropdown-content button {
