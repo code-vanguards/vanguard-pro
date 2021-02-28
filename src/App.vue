@@ -24,6 +24,7 @@
   </section>
   <section id="tasks-area">
     <new-task
+      :projects="projects"
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
