@@ -28,14 +28,11 @@
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
-      <li v-for="task in tasks"
-      :key="task.id">
-        Name: {{ task.name }}
-        Comment: {{ task.comment}}
-        Gems: {{ task.gems }}
-        Due Date: {{ task.dueDate }}
-        Project: {{ task.project.name }}
-      </li>
+      <task-info
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+      ></task-info>
     </ul>
     <!-- GameTracker -->
   </section>
@@ -201,6 +198,7 @@ h2 { font-size: 1.4rem; }
 
 .tasks-list {
   list-style: none;
+  padding: 0 30px;
 }
 
 .tasks-list li {
