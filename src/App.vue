@@ -21,7 +21,13 @@
         @add-project="addProject"
       ></new-project>
       <ul>
-        <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
+        <!--<li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>-->
+        <project-info
+          v-for="project in projects"
+          :key="project.id"
+          :project="project"
+          @projectFilter="projectFilter"
+        ></project-info>
       </ul>
     </div>
   </section>
@@ -35,9 +41,11 @@
         v-for="task in tasks"
         :key="task.id"
         :task="task"
+        @complete-task="completeTask"
       ></task-info>
     </ul>
     <!-- GameTracker -->
+    <game-tracker></game-tracker>
   </section>
 </template>
 
@@ -47,8 +55,7 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 export default {
   data() {
     return {
-      //look for when the task is complete, not complete(total tasks - complete tasks) and gems/coins
-      //using taskFactory gem = 5, isCompleted, total tasks
+      projFilter:{},
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
@@ -57,26 +64,16 @@ export default {
       projects: [
         projectFactory('School'),
         projectFactory('Work'),
+        projectFactory('Chores'),
       ],
-      tasks: [
-        taskFactory(
-          'Buy Groceries',
-          new Date().toISOString(),
-          'Go to Canadian Superstore and buy bananas.',
-          projectFactory('Chores'),
-          5
-        ),
-        taskFactory(
-          'Pay Bills',
-          new Date().toISOString(),
-          'Pay Electric and Credit Card',
-          projectFactory('Chores'),
-          5
-        ),
-      ],
+      tasks: [],
     };
   },
   methods: {
+    projectFilter(name){
+      this.projFilter = name;
+      console.log(this.projFilter);
+    },
     addTask(task) {
       const foundProject = this.projects.find(project => project.name === task.projectName);
       this.tasks.push(taskFactory(
@@ -97,6 +94,10 @@ export default {
       this.stats.uncompletedTasks+=1;
       console.log(this.stats.gems);
       console.log(this.stats.uncompletedTasks);
+    },
+    completeTask(taskId) {
+      const theTask = this.tasks.find(task => task.id === taskId);
+      theTask.isCompleted = true;
     },
   },
   watch: {

@@ -17,7 +17,7 @@ export default {
   methods:{
     getTime(){
       //this.time= new Date();
-      console.log('e');
+      //console.log('e');
       const currentTime = new Date();
       //this.time =  currentTime.
 
@@ -34,7 +34,7 @@ export default {
       //this.time = new Date();
     },
     updateTime(){
-      console.log("script running")
+      //console.log("script running")
       this.getTime();
       setInterval(this.getTime,1000);
     },
