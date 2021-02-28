@@ -1,14 +1,19 @@
 <template>
-  <ul >
-    <h2
-     {{projects}}
-  ></h2>
-  </ul>
+  <li>
+    <button v-on:click="filter"> {{project.name}}</button>
+  </li>
 </template>
 
 <script>
 export default {
-  props:['projects'],
+  props:['project'],
+  emits:['projectFilter'],
+  methods:{
+    filter(){
+      //console.log('worked');
+      this.$emit('projectFilter',this.project)
+    },   
+  }
 };
 </script>
 

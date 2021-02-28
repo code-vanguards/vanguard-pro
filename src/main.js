@@ -14,7 +14,7 @@ const app = createApp(App);
 
 app.component('date-display', DateDisplay);
 app.component('new-task', NewTask);
-app.component('projecst-list', ProjectInfo);
+app.component('project-info', ProjectInfo);
 app.component('stat-counters', StatCounters);
 app.component('task-info', TaskInfo);
 app.component('game-tracker', GameTracker);

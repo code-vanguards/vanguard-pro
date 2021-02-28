@@ -17,11 +17,14 @@
       <new-project
         @add-project="addProject"
       ></new-project>
-      <project-info
-        :projects="projects"
-      ></project-info>
       <ul>
-        <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
+        <!--<li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>-->
+        <project-info
+          v-for="project in projects"
+          :key="project.id"
+          :project="project"
+          @projectFilter="projectFilter"
+        ></project-info>
       </ul>
     </div>
   </section>
@@ -47,6 +50,7 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 export default {
   data() {
     return {
+      projFilter:{},
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
@@ -55,26 +59,16 @@ export default {
       projects: [
         projectFactory('School'),
         projectFactory('Work'),
+        projectFactory('Chores'),
       ],
-      tasks: [
-        taskFactory(
-          'Buy Groceries',
-          new Date().toISOString(),
-          'Go to Canadian Superstore and buy bananas.',
-          projectFactory('Chores'),
-          5
-        ),
-        taskFactory(
-          'Pay Bills',
-          new Date().toISOString(),
-          'Pay Electric and Credit Card',
-          projectFactory('Chores'),
-          5
-        ),
-      ],
+      tasks: [],
     };
   },
   methods: {
+    projectFilter(name){
+      this.projFilter = name;
+      console.log(this.projFilter);
+    },
     addTask(task) {
       const foundProject = this.projects.find(project => project.name === task.projectName);
       this.tasks.push(taskFactory(
