@@ -1,9 +1,15 @@
 <template>
-  <span>Placeholder</span>
+  <ul >
+    <h2
+     {{projects}}
+  ></h2>
+  </ul>
 </template>
 
 <script>
-export default {};
+export default {
+  props:['projects'],
+};
 </script>
 
 <style scoped>

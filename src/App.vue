@@ -17,6 +17,9 @@
       <new-project
         @add-project="addProject"
       ></new-project>
+      <project-info
+        :projects="projects"
+      ></project-info>
       <ul>
         <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
       </ul>
