@@ -21,7 +21,7 @@
     </header>
     <form @submit.prevent="addTask">
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
-      <select @click="hideDropdowns" v-model="task.ProjectName">
+      <select @click="hideDropdowns" v-model="task.projectName">
         <option disabled selected>Select a Project</option>
         <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
       </select>
@@ -76,6 +76,11 @@ export default {
       this.isCommentDropdownVisible = false;
     }
   },
+  watch: {
+    projectName(value) {
+      console.log(value);
+    }
+  }
 };
 </script>
 
