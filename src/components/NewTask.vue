@@ -21,7 +21,7 @@
     </header>
     <form @submit.prevent="addTask">
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
-      <select v-model="task.ProjectName">
+      <select @click="hideDropdowns" v-model="task.ProjectName">
         <option disabled selected>Select a Project</option>
         <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
       </select>
@@ -49,12 +49,16 @@ export default {
   methods: {
     addTask() {
       if (this.task.name) {
-        this.$emit('add-task', this.task);
-        this.task.name = '';
-        this.task.comment = '';
-        this.task.projectName = '';
-        this.task.gems = 0;
-        this.hideDropdowns();
+        if(this.task.projectName) {
+          this.$emit('add-task', this.task);
+          this.task.name = '';
+          this.task.comment = '';
+          this.task.projectName = '';
+          this.task.gems = 0;
+          this.hideDropdowns();
+        } else {
+          alert("Please select a project. Create a new project if needed.");
+        }
       } else {
         alert('Please enter a task.');
       }
