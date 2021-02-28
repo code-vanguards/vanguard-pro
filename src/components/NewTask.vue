@@ -6,7 +6,7 @@
         <div class="dropdown-wrapper">
           <img id="gems-img" title="Add Gems" src="../assets/197-diamond.png" class="img-btn" @click="toggleGemDropdown" />
           <div class="dropdown-content" v-show="isGemDropdownVisible">
-            <input type="number" v-model="task.gems" />
+            <input type="number" min="0" v-model="task.gems" />
             <button @click="toggleGemDropdown">Ok</button>
           </div>
         </div>
@@ -21,7 +21,7 @@
     </header>
     <form @submit.prevent="addTask">
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
-      <select v-model="task.ProjectName">
+      <select @click="hideDropdowns" v-model="task.projectName">
         <option disabled selected>Select a Project</option>
         <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
       </select>
@@ -49,12 +49,16 @@ export default {
   methods: {
     addTask() {
       if (this.task.name) {
-        this.$emit('add-task', this.task);
-        this.task.name = '';
-        this.task.comment = '';
-        this.task.projectName = '';
-        this.task.gems = 0;
-        this.hideDropdowns();
+        if(this.task.projectName) {
+          this.$emit('add-task', this.task);
+          this.task.name = '';
+          this.task.comment = '';
+          this.task.projectName = '';
+          this.task.gems = 0;
+          this.hideDropdowns();
+        } else {
+          alert("Please select a project. Create a new project if needed.");
+        }
       } else {
         alert('Please enter a task.');
       }
@@ -72,6 +76,11 @@ export default {
       this.isCommentDropdownVisible = false;
     }
   },
+  watch: {
+    projectName(value) {
+      console.log(value);
+    }
+  }
 };
 </script>
 
