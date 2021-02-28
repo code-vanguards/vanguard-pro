@@ -17,6 +17,9 @@
   <section id="left-panel">
     <h2>Projects List</h2>
     <div class="projects-list">
+      <new-project
+        @add-project="addProject"
+      ></new-project>
       <ul>
         <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
       </ul>
@@ -24,17 +27,15 @@
   </section>
   <section id="tasks-area">
     <new-task
+      :projects="projects"
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
-      <li v-for="task in tasks"
-      :key="task.id">
-        Name: {{ task.name }}
-        Comment: {{ task.comment}}
-        Gems: {{ task.gems }}
-        Due Date: {{ task.dueDate }}
-        Project: {{ task.project.name }}
-      </li>
+      <task-info
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+      ></task-info>
     </ul>
     <!-- GameTracker -->
   </section>
@@ -78,27 +79,19 @@ export default {
   methods: {
     addTask(task) {
       const foundProject = this.projects.find(project => project.name === task.projectName);
-      console.log(task);
-      if (foundProject) {
-        // Just push the project
-        this.tasks.push(taskFactory(
-          task.name,
-          undefined,
-          task.comment,
-          foundProject,
-          task.gems
-        ));
+      this.tasks.push(taskFactory(
+        task.name,
+        undefined,
+        task.comment,
+        foundProject,
+        task.gems
+      ));
+    },
+    addProject(projectName) {
+      if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
+        alert('Project already exists.');
       } else {
-        // Add the new project then push
-        const newProject = projectFactory(task.projectName);
-        this.projects.push(newProject);
-        this.tasks.push(taskFactory(
-          task.name,
-          undefined,
-          task.comment,
-          newProject,
-          task.gems
-        ));
+        this.projects.push(projectFactory(projectName));
       }
       this.stats.gems += Number(task.gems);
       this.stats.uncompletedTasks+=1;
@@ -199,10 +192,15 @@ h2 { font-size: 1.4rem; }
 
 .tasks-list {
   list-style: none;
+  padding: 0 30px;
 }
 
 .tasks-list li {
   border-bottom: 2px solid #c3c3c3;
   margin-bottom: 1rem;
+}
+
+.projects-list {
+  width: 100%;
 }
 </style>
