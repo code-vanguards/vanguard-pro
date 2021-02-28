@@ -20,10 +20,9 @@
     </div>
   </section>
   <section id="tasks-area">
-    <div class="new-task">
-      <!-- NewTask-->
-      Add Task
-    </div>
+    <new-task
+      @add-task="addTask"
+    ></new-task>
     <ul class="tasks-list">
       <li v-for="task in tasks"
       :key="task.id">
@@ -56,15 +55,15 @@ export default {
       tasks: [
         taskFactory(
           'Buy Groceries',
-          'Go to Canadian Superstore and buy bananas.',
           new Date().toISOString(),
+          'Go to Canadian Superstore and buy bananas.',
           projectFactory('Chores'),
-          10
+          5
         ),
         taskFactory(
           'Pay Bills',
-          'Pay Electric and Credit Card',
           new Date().toISOString(),
+          'Pay Electric and Credit Card',
           projectFactory('Chores'),
           5
         ),
@@ -72,6 +71,9 @@ export default {
     };
   },
   methods: {
+    addTask(task) {
+      this.tasks.push(taskFactory(task));
+    },
   },
   computed: {
   },
@@ -156,16 +158,6 @@ h2 { font-size: 1.4rem; }
   background-color: #f0f0f0;
   grid-area: tasks;
   padding: 2rem;
-}
-
-.new-task {
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: auto;
-  width: 50rem;
-  height: 5rem;
-  text-align: center;
-  margin-bottom: 4rem;
 }
 
 .tasks-list {

@@ -1,7 +1,7 @@
 import { generateId } from './helpers.js';
 
 // Creates new tasks objects. Makes it easier and keeps objects consistent.
-export function taskFactory(name, comment, dueDate, project, gems, isCompleted=false, id=generateId(0, 1000000)) {
+export function taskFactory(name, dueDate, comment='', project={}, gems=1, isCompleted=false, id=generateId(0, 1000000)) {
   return {
     id,
     name,
