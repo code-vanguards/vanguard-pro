@@ -1,6 +1,6 @@
 <template>
-    <li>
-      <img class="li-item check-img" src="../assets/059-success.png" />
+    <li v-if="filterRule">
+      <img class="li-item check-img" src="../assets/059-success.png" @click="completeTask"/>
       <div class="li-item task-name">{{ task.name }}</div>
       <div class="li-item task-project">{{ task.project.name }}</div>
       <div class="li-item stats-wrapper">
@@ -15,19 +15,29 @@
 
 <script>
 export default {
-  props: ['task'],
+  emits: ['complete-task'],
+  props: ['task', 'projects'],
   data() {
     return {
 
     };
   },
   methods: {
+    completeTask() {
+      this.$emit('complete-task', this.task.id);
+    },
   },
+  computed: {
+    filterRule() {
+      return !this.task.isCompleted;
+    }
+  }
 };
 </script>
 
 <style scoped>
 img {
+  user-select: none;
   width: 32px;
 }
 

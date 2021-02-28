@@ -32,6 +32,7 @@
         v-for="task in tasks"
         :key="task.id"
         :task="task"
+        @complete-task="completeTask"
       ></task-info>
     </ul>
     <!-- GameTracker -->
@@ -88,6 +89,10 @@ export default {
       } else {
         this.projects.push(projectFactory(projectName));
       }
+    },
+    completeTask(taskId) {
+      const theTask = this.tasks.find(task => task.id === taskId);
+      theTask.isCompleted = true;
     },
   },
   watch: {
