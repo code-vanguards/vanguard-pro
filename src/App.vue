@@ -28,7 +28,7 @@
       :key="task.id">
         Name: {{ task.name }}
         Comment: {{ task.comment}}
-        Gems: {{ task.gemsWorth }}
+        Gems: {{ task.gems }}
         Due Date: {{ task.dueDate }}
         Project: {{ task.project.name }}
       </li>
@@ -72,7 +72,29 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.tasks.push(taskFactory(task.name, undefined, task.comment));
+      const foundProject = this.projects.find(project => project.name === task.projectName);
+      console.log(task);
+      if (foundProject) {
+        // Just push the project
+        this.tasks.push(taskFactory(
+          task.name,
+          undefined,
+          task.comment,
+          foundProject,
+          task.gems
+        ));
+      } else {
+        // Add the new project then push
+        const newProject = projectFactory(task.projectName);
+        this.projects.push(newProject);
+        this.tasks.push(taskFactory(
+          task.name,
+          undefined,
+          task.comment,
+          newProject,
+          task.gems
+        ));
+      }
     },
   },
   watch: {
