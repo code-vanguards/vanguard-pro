@@ -27,8 +27,8 @@
       <li v-for="task in tasks"
       :key="task.id">
         Name: {{ task.name }}
-        Comment: {{task.comment}}
-        Gems: {{ task.gemsWorth }}
+        Comment: {{ task.comment}}
+        Gems: {{ task.gems }}
         Due Date: {{ task.dueDate }}
         Project: {{ task.project.name }}
       </li>
@@ -72,23 +72,46 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.tasks.push(taskFactory(task));
+      const foundProject = this.projects.find(project => project.name === task.projectName);
+      console.log(task);
+      if (foundProject) {
+        // Just push the project
+        this.tasks.push(taskFactory(
+          task.name,
+          undefined,
+          task.comment,
+          foundProject,
+          task.gems
+        ));
+      } else {
+        // Add the new project then push
+        const newProject = projectFactory(task.projectName);
+        this.projects.push(newProject);
+        this.tasks.push(taskFactory(
+          task.name,
+          undefined,
+          task.comment,
+          newProject,
+          task.gems
+        ));
+      }
     },
   },
-  computed: {
-  },
   watch: {
-    /*
-    tasks(value) {
+    tasks() {
       console.log('In tasks watcher...');
+      /*
       this.projects = value.map(task => {
         if (!this.projects.some(project => task.project.id === project.id)) { // False, if project doesn't exist
           console.log(`Project ID not found ${task.project.id}.`);
-          return { projectFactory(task.project.name, task.project.id);
+          return projectFactory({
+            name: task.project.name,
+            id: task.project.id
+          });
         }
       });
+      */
     },
-    */
   },
 };
 </script>
@@ -158,6 +181,11 @@ h2 { font-size: 1.4rem; }
   background-color: #f0f0f0;
   grid-area: tasks;
   padding: 2rem;
+}
+
+.img-btn {
+  width: 32px;
+  cursor: pointer;
 }
 
 .tasks-list {
