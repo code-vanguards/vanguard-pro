@@ -14,6 +14,9 @@
   <section id="left-panel">
     <h2>Projects List</h2>
     <div class="projects-list">
+      <new-project
+        @add-project="addProject"
+      ></new-project>
       <ul>
         <li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>
       </ul>
@@ -21,17 +24,15 @@
   </section>
   <section id="tasks-area">
     <new-task
+      :projects="projects"
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
-      <li v-for="task in tasks"
-      :key="task.id">
-        Name: {{ task.name }}
-        Comment: {{task.comment}}
-        Gems: {{ task.gemsWorth }}
-        Due Date: {{ task.dueDate }}
-        Project: {{ task.project.name }}
-      </li>
+      <task-info
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+      ></task-info>
     </ul>
     <!-- GameTracker -->
     <game-tracker></game-tracker>
@@ -73,23 +74,38 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.tasks.push(taskFactory(task));
+      const foundProject = this.projects.find(project => project.name === task.projectName);
+      this.tasks.push(taskFactory(
+        task.name,
+        undefined,
+        task.comment,
+        foundProject,
+        task.gems
+      ));
+    },
+    addProject(projectName) {
+      if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
+        alert('Project already exists.');
+      } else {
+        this.projects.push(projectFactory(projectName));
+      }
     },
   },
-  computed: {
-  },
   watch: {
-    /*
-    tasks(value) {
+    tasks() {
       console.log('In tasks watcher...');
+      /*
       this.projects = value.map(task => {
         if (!this.projects.some(project => task.project.id === project.id)) { // False, if project doesn't exist
           console.log(`Project ID not found ${task.project.id}.`);
-          return { projectFactory(task.project.name, task.project.id);
+          return projectFactory({
+            name: task.project.name,
+            id: task.project.id
+          });
         }
       });
+      */
     },
-    */
   },
 };
 </script>
@@ -161,12 +177,22 @@ h2 { font-size: 1.4rem; }
   padding: 2rem;
 }
 
+.img-btn {
+  width: 32px;
+  cursor: pointer;
+}
+
 .tasks-list {
   list-style: none;
+  padding: 0 30px;
 }
 
 .tasks-list li {
   border-bottom: 2px solid #c3c3c3;
   margin-bottom: 1rem;
+}
+
+.projects-list {
+  width: 100%;
 }
 </style>
