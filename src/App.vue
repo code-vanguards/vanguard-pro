@@ -24,6 +24,7 @@
   </section>
   <section id="tasks-area">
     <new-task
+      :projects="projects"
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
@@ -100,7 +101,11 @@ export default {
       }
     },
     addProject(projectName) {
-      this.projects.push(projectFactory(projectName));
+      if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
+        alert('Project already exists.');
+      } else {
+        this.projects.push(projectFactory(projectName));
+      }
     },
   },
   watch: {
