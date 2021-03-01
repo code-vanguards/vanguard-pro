@@ -117,19 +117,21 @@ form {
 
 form button {
   border-radius: 3px;
+  color: #f0f0f0;
+  font-weight: bold;
   width: 4rem;
   padding: 5px;
-  background-color: #c4ff0e;
-  box-shadow: 0 0 3px;
+  background-color: #ff7f27;
+  box-shadow: 0 0 3px black;
   border-style: none;
 }
 
 form button:hover {
-  background-color: lightblue;
+  background-color: #ffa465;
 }
 
 form button:active {
-  background-color: #1d58fe;
+  background-color: #ff7f27;
 }
 
 #gems-img {
