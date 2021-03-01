@@ -21,7 +21,7 @@ export default {
       const currentTime = new Date();
       //this.time =  currentTime.
 
-      //const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']; 
+      //const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
       const date = currentTime.toDateString();
       const time = currentTime.toTimeString();
       this.date = date.substring(0,date.lastIndexOf(' '));

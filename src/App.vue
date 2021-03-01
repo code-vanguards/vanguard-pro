@@ -11,8 +11,8 @@
       ></stat-counters>
     </div>
     <div>
-      <streak-counter 
-      :completedTasks="stats.completedTasks"
+      <streak-counter
+        :completedTasksToday="completedTasksToday"
       ></streak-counter>
     </div>
     <div>
@@ -66,6 +66,7 @@ export default {
         completedTasks: 0,
         gems: 0,
       },
+      completedTasksToday: 0,
       projects: [
         projectFactory('School'),
         projectFactory('Work'),
@@ -89,7 +90,6 @@ export default {
         task.gems
       ));
       this.stats.uncompletedTasks+=1;
-
     },
     addProject(projectName) {
       if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
@@ -102,6 +102,7 @@ export default {
       const theTask = this.tasks.find(task => task.id === taskId);
       theTask.isCompleted = true;
       this.stats.completedTasks +=1;
+      this.stats.completedTasksToday++;
       this.stats.uncompletedTasks-=1;
       this.stats.gems+= Number(theTask.gems);
     },
@@ -109,18 +110,18 @@ export default {
   watch: {
     tasks() {
       console.log('In tasks watcher...');
-      /*
-      this.projects = value.map(task => {
-        if (!this.projects.some(project => task.project.id === project.id)) { // False, if project doesn't exist
-          console.log(`Project ID not found ${task.project.id}.`);
-          return projectFactory({
-            name: task.project.name,
-            id: task.project.id
-          });
-        }
-      });
-      */
     },
+    completedTasksToday() {
+      console.log('In App, completedTasksToday() watcher...');
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      console.log('Reseting number of completed tasks today...');
+      console.log(`Old: ${this.completedTasksToday}`);
+      this.completedTasksToday = 0;
+      console.log(`New: ${this.completedTasksToday}`);
+    }, 15 * 1000);
   },
 };
 </script>
