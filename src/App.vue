@@ -5,13 +5,16 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
+      <game-tracker></game-tracker>
+    </div>
+    <div>
       <!--Code for the counters-->
       <stat-counters
         :stat="stats"
       ></stat-counters>
     </div>
     <div>
-      <streak-counter 
+      <streak-counter
       :completedTasks="stats.completedTasks"
       ></streak-counter>
     </div>
@@ -26,7 +29,6 @@
         @add-project="addProject"
       ></new-project>
       <ul>
-        <!--<li v-for="project in projects" v-bind:key="project.id">{{ project.name }}</li>-->
         <project-info
           v-for="project in projects"
           :key="project.id"
@@ -55,8 +57,6 @@
         @edit-comment="editComment"
       ></task-info>
     </ul>
-    <!-- GameTracker -->
-    <game-tracker></game-tracker>
   </section>
 </template>
 
