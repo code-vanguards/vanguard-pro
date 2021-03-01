@@ -42,6 +42,7 @@
         :task="task"
         :projects="projects"
         @complete-task="completeTask"
+        @select-task-project="selectTaskProject"
       ></task-info>
     </ul>
     <!-- GameTracker -->
@@ -84,7 +85,6 @@ export default {
         task.gems
       ));
       this.stats.uncompletedTasks+=1;
-
     },
     addProject(projectName) {
       if (this.projects.some(proj => proj.name === projectName.toLowerCase())) {
@@ -94,11 +94,19 @@ export default {
       }
     },
     completeTask(taskId) {
-      const theTask = this.tasks.find(task => task.id === taskId);
+      const theTask = this.findTask(taskId);
       theTask.isCompleted = true;
       this.stats.completedTasks +=1;
       this.stats.uncompletedTasks-=1;
       this.stats.gems+= Number(theTask.gems);
+    },
+    selectTaskProject(taskId, project) {
+      const theTask = this.findTask(taskId);
+      console.log(this.tasks);
+      theTask.project = project;
+    },
+    findTask(taskId) {
+      return this.tasks.find(task => task.id === taskId);
     },
   },
   watch: {
