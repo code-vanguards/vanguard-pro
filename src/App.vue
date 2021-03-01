@@ -23,20 +23,20 @@
     </div>
   </header>
   <section id="left-panel">
-    <h2>Projects List</h2>
-    <div class="projects-list">
+    <div class="item projects-list">
       <new-project
         @add-project="addProject"
       ></new-project>
-      <ul>
-        <project-info
-          v-for="project in projects"
-          :key="project.id"
-          :project="project"
-          @projectFilter="projectFilter"
-        ></project-info>
-      </ul>
     </div>
+    <div class="spacer"></div>
+    <ul class="item">
+      <project-info
+        v-for="project in projects"
+        :key="project.id"
+        :project="project"
+        @projectFilter="projectFilter"
+      ></project-info>
+    </ul>
   </section>
   <section id="tasks-area">
     <new-task
@@ -161,7 +161,7 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
   font-family: 'Jost', sans-serif;
 }
 
@@ -190,13 +190,28 @@ h2 { font-size: 1.4rem; }
   margin-right: auto;
 }
 
+/*
+Left panel
+==========
+*/
 #left-panel {
   background-color: #0080b9;
   grid-area: leftPanel;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+}
+
+#left-panel > .item {
+  margin-top: 20px;
+}
+
+#left-panel > ul {
+  width: 100%;
+}
+
+#left-panel > .spacer {
+
 }
 
 #tasks-area {
@@ -280,4 +295,5 @@ Dropdown styling
 .dropdown-content button {
   width: 30%;
 }
+
 </style>
