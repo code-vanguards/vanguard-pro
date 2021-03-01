@@ -11,6 +11,11 @@
       ></stat-counters>
     </div>
     <div>
+      <streak-counter 
+      :completedTasks="stats.completedTasks"
+      ></streak-counter>
+    </div>
+    <div>
       <date-display></date-display>
     </div>
   </header>
