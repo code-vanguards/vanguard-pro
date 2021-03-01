@@ -15,7 +15,7 @@
     </div>
     <div>
       <streak-counter
-      :completedTasks="stats.completedTasks"
+        :tasksToday="completedTasksToday"
       ></streak-counter>
     </div>
     <div>
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       projFilter: {},
+      completedTasksToday: 0,
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
@@ -106,6 +107,7 @@ export default {
       const theTask = this.findTask(taskId);
       theTask.isCompleted = true;
       this.stats.completedTasks +=1;
+      this.completedTasksToday++;
       this.stats.uncompletedTasks-=1;
       this.stats.gems+= Number(theTask.gems);
     },
@@ -134,6 +136,18 @@ export default {
       handler() {
       },
     },
+    completedTasksToday(value) {
+      console.log('In App, completedTasksToday() watcher...');
+      console.log(value);
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      console.log("It's a new day! Resetting number of completed tasks today:");
+      console.log(`Old: ${this.completedTasksToday}`);
+      this.completedTasksToday = 0;
+      console.log(`New: ${this.completedTasksToday}`);
+    }, 86400000);
   },
 };
 </script>
