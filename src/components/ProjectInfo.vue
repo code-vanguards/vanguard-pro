@@ -10,8 +10,9 @@ export default {
   emits:['projectFilter'],
   methods:{
     filter(){
+      //console.log('worked');
       this.$emit('projectFilter',this.project)
-    },
+    },   
   }
 };
 </script>

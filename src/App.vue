@@ -5,6 +5,9 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
+      <game-tracker></game-tracker>
+    </div>
+    <div>
       <!--Code for the counters-->
       <stat-counters
         :stat="stats"
@@ -46,11 +49,14 @@
         :key="task.id"
         :task="task"
         :projects="projects"
+        :projectFilter="projFilter"
         @complete-task="completeTask"
+        @select-task-project="selectTaskProject"
+        @edit-gems="editGems"
+        @remove-task="removeTask"
+        @edit-comment="editComment"
       ></task-info>
     </ul>
-    <!-- GameTracker -->
-    <game-tracker></game-tracker>
   </section>
 </template>
 
@@ -76,9 +82,8 @@ export default {
     };
   },
   methods: {
-    projectFilter(name){
-      this.projFilter = name;
-      console.log(this.projFilter);
+    projectFilter(proj){
+      this.projFilter = proj;
     },
     addTask(task) {
       const foundProject = this.projects.find(project => project.name === task.projectName);
@@ -99,17 +104,37 @@ export default {
       }
     },
     completeTask(taskId) {
-      const theTask = this.tasks.find(task => task.id === taskId);
+      const theTask = this.findTask(taskId);
       theTask.isCompleted = true;
       this.stats.completedTasks +=1;
       this.completedTasksToday++;
       this.stats.uncompletedTasks-=1;
       this.stats.gems+= Number(theTask.gems);
     },
+    selectTaskProject(taskId, project) {
+      const theTask = this.findTask(taskId);
+      theTask.project = project;
+    },
+    editGems(taskId, gems) {
+      const theTask = this.findTask(taskId);
+      theTask.gems = gems;
+    },
+    removeTask(taskId) {
+      this.tasks = this.tasks.filter(task => task.id !== taskId);
+    },
+    findTask(taskId) {
+      return this.tasks.find(task => task.id === taskId);
+    },
+    editComment(taskId, comment) {
+      const theTask = this.findTask(taskId);
+      theTask.comment = comment;
+    }
   },
   watch: {
-    tasks() {
-      console.log('In tasks watcher...');
+    tasks: {
+      deep: true,
+      handler() {
+      },
     },
     completedTasksToday(value) {
       console.log('In App, completedTasksToday() watcher...');
@@ -128,7 +153,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Roboto&display=swap');
 /* How to use the font above:
   font-family: 'Jost', sans-serif;
   font-family: 'Roboto', sans-serif;
@@ -191,7 +216,7 @@ h2 { font-size: 1.4rem; }
 #tasks-area {
   background-color: #f0f0f0;
   grid-area: tasks;
-  padding: 2rem;
+  padding: 2rem 5rem;
 }
 
 .img-btn {
@@ -211,5 +236,62 @@ h2 { font-size: 1.4rem; }
 
 .projects-list {
   width: 100%;
+}
+
+
+/*
+Dropdown styling
+================
+*/
+.dropdown-container {
+  margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #585858;
+  border-radius: 10px;
+  padding: 10px;
+  width: 10rem;
+  right: 0;
+  z-index: 1;
+}
+
+.dropdown-content li {
+  list-style: none;
+  border: none;
+  color: #f0f0f0;
+  width: 100%;
+  text-align: center;
+  margin: 2px;
+  user-select: none;
+}
+
+.dropdown-content li:hover {
+  background-color: grey;
+}
+
+.dropdown-content textarea {
+  resize: none;
+  width: 80%;
+}
+
+.dropdown-content button {
+  width: 30%;
 }
 </style>
