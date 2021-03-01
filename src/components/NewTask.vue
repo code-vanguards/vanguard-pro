@@ -132,37 +132,6 @@ form button:active {
   background-color: #1d58fe;
 }
 
-.dropdown-container {
-  margin-left: 1.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.dropdown-wrapper {
-  position: relative;
-}
-
-.dropdown-content {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #585858;
-  border-radius: 10px;
-  padding: 10px;
-  width: 10rem;
-  right: 0;
-}
-
-.dropdown-content textarea {
-  resize: none;
-  width: 80%;
-}
-
-.dropdown-content button {
-  width: 30%;
-}
-
 #gems-img {
   width: 16px;
   margin-right: 3px;
