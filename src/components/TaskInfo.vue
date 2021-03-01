@@ -1,43 +1,96 @@
 <template>
-    <li v-if="filterRule">
+    <li class="task-list" v-if="filterRule">
       <img class="li-item check-img" src="../assets/059-success.png" @click="completeTask"/>
       <div class="li-item task-name">{{ task.name }}</div>
       <div class="li-item task-project dropdown-wrapper">
-        <select @input="getProjectSelection">
+        <select @input="getProjectSelection" @click="hideDropdowns">
           <option disabled hidden selected>{{ task.project.name }}</option>
           <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
         </select>
       </div>
       <div class="li-item stats-wrapper">
-        <div class="stats-item gems-content">
-          <img class="gems-img" src="../assets/197-diamond.png" />
-          <span class="task-gems">{{ task.gems }}</span>
+        <div class="stats-item dropdown-wrapper" >
+          <div class="dropdown-info gems-content" @click="toggleGemDropdown">
+            <img class="gems-img" src="../assets/197-diamond.png" />
+            <span class="task-gems">{{ task.gems }}</span>
+          </div>
+          <div class="dropdown-content" v-if="isGemDropdownVisible">
+            <input type="number" :min="minGems" :max="maxGems" v-model="gems" />
+            <button @click="editGems">Ok</button>
+          </div>
         </div>
       </div>
-      <img class="li-item options-img" src="../assets/316-more.png" />
+      <div class="li-item dropdown-wrapper">
+        <img class="options-img" src="../assets/316-more.png" @click="toggleOptionsDropdown"/>
+        <ul class="options-dropdown-content dropdown-content" v-if="isOptionsDropdownVisible">
+          <li @click="editComment">Comment</li>
+          <li @click="$emit('remove-task', task.id)">Remove</li>
+        </ul>
+      </div>
     </li>
 </template>
 
 <script>
 export default {
-  emits: ['complete-task', 'select-task-project'],
-  props: ['task', 'projects'],
+  emits: [
+    'complete-task',
+    'select-task-project',
+    'edit-gems',
+    'edit-comment',
+    'remove-task',
+  ],
+  props: ['task', 'projects', 'projectFilter'],
   data() {
     return {
+      minGems: 0,
+      maxGems: 99,
+      gems: 0,
+      comment: '',
       projectSelection: {},
+      isGemDropdownVisible: false,
+      isOptionsDropdownVisible: false,
     };
   },
   methods: {
     completeTask() {
+      this.hideDropdowns();
       this.$emit('complete-task', this.task.id);
     },
     getProjectSelection(event) {
       this.projectSelection = event.target.value;
     },
+    toggleGemDropdown() {
+      this.isGemDropdownVisible = !this.isGemDropdownVisible;
+      this.isOptionsDropdownVisible = false;
+    },
+    toggleOptionsDropdown() {
+      this.isOptionsDropdownVisible = !this.isOptionsDropdownVisible;
+      this.isGemDropdownVisible = false;
+    },
+    hideDropdowns() {
+      this.isGemDropdownVisible = false;
+      this.isOptionsDropdownVisible = false;
+    },
+    editGems() {
+      if (this.gems >= this.minGems && this.gems <= this.maxGems) {
+        this.$emit('edit-gems', this.task.id, this.gems);
+      } else {
+        alert(`Amount of gems must be between ${this.minGems} and ${this.maxGems}`);
+      }
+      this.gems = 0;
+      this.toggleGemDropdown();
+    },
+    editComment() {
+      this.hideDropdowns();
+      this.comment = prompt('Edit Comment', this.task.comment);
+      if (this.comment !== null) {
+        this.$emit('edit-comment', this.task.id, this.comment);
+      }
+    },
   },
   computed: {
     filterRule() {
-      return !this.task.isCompleted;
+      return (!this.task.isCompleted) && (this.task.project.id === this.projectFilter.id);
     },
   },
   watch: {
@@ -55,7 +108,7 @@ img {
   width: 32px;
 }
 
-li {
+.task-list {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -68,6 +121,8 @@ li {
 }
 
 .task-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.35em;
   margin-left: 20px;
   margin-right: auto;
 }
@@ -97,12 +152,28 @@ li {
   margin-left: 5px;
 }
 
+.dropdown-content {
+  top: 20px;
+}
+
+.options-dropdown-content {
+  top: 40px;
+  right: 10px;
+}
+
 select {
   appearance: none;
   outline: none;
   border: none;
   background-color: black;
-  font-style: inherit;
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
   color: inherit;
+}
+
+select option {
+  font-family: inherit;
+  background-color: #585858;
 }
 </style>
