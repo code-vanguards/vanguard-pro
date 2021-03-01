@@ -39,7 +39,7 @@ export default {
       new Date()
       //console.log(this.PlayTimeDays[1].date)
       this.retrieveInfo();
-      setInterval(this.retrieveInfo,60000);//300000);//150000);//300000);
+      setInterval(this.retrieveInfo,300000);//300000);//150000);//300000);
     },
     retrieveInfo(){
       const debug = false;
