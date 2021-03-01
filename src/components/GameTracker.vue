@@ -34,7 +34,7 @@ export default {
     }
   },
   methods:{
-    
+
     startSteam(){
       new Date()
       //console.log(this.PlayTimeDays[1].date)
@@ -48,7 +48,7 @@ export default {
       //console.log('its working');
 
       //const key = "2FCA2BF846002C36C45300F0299645BE";
-      //const profileID = "76561198050490125"; 
+      //const profileID = "76561198050490125";
       //const query = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${key}&steamids=${profileID}`;
       //const query = "https://jsonplaceholder.typicode.com/users";
       //const query = `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${key}&steamid=${profileID}&format=json`;
@@ -91,13 +91,13 @@ export default {
     });
       console.log(template);
       */
-      
+
       let request = new XMLHttpRequest();
       request.open("GET","https://percy.tech/hackathon/result.html");
       //request.setRequestHeader('Access-Control-Allow-Origin','http://localhost:8082/');
       //request.setRequestHeader('Content-Type','application/json');
       request.send();
-      
+
       request.onload = () => {
         //console.log(request);
         if(request.status === 200) { //if request was a success
@@ -106,7 +106,7 @@ export default {
           let str = request.response;
           let doc = new DOMParser().parseFromString(str, "text/html");
           let e = doc.getElementsByClassName('profile_in_game_header');
-          //console.log(e.item(0)); 
+          //console.log(e.item(0));
           const userStatus = e.item(0).innerHTML;
 
           //if it is a new day create a new element at the start of the date array
@@ -167,4 +167,3 @@ export default {
 
 };
 </script>
-
