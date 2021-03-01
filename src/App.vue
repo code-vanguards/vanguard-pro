@@ -12,7 +12,7 @@
     </div>
     <div>
       <streak-counter
-        :completedTasksToday="completedTasksToday"
+        :tasksToday="completedTasksToday"
       ></streak-counter>
     </div>
     <div>
@@ -60,13 +60,13 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 export default {
   data() {
     return {
-      projFilter:{},
+      projFilter: {},
+      completedTasksToday: 0,
       stats: {
         uncompletedTasks: 0,
         completedTasks: 0,
         gems: 0,
       },
-      completedTasksToday: 0,
       projects: [
         projectFactory('School'),
         projectFactory('Work'),
@@ -102,7 +102,7 @@ export default {
       const theTask = this.tasks.find(task => task.id === taskId);
       theTask.isCompleted = true;
       this.stats.completedTasks +=1;
-      this.stats.completedTasksToday++;
+      this.completedTasksToday++;
       this.stats.uncompletedTasks-=1;
       this.stats.gems+= Number(theTask.gems);
     },
@@ -111,8 +111,9 @@ export default {
     tasks() {
       console.log('In tasks watcher...');
     },
-    completedTasksToday() {
+    completedTasksToday(value) {
       console.log('In App, completedTasksToday() watcher...');
+      console.log(value);
     },
   },
   mounted() {

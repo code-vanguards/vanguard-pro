@@ -3,13 +3,12 @@
 </template>
 
 <script>
-//import { toDate } from '../lib/helpers.js';
-
 export default {
   props: {
-    completedTasksToday: {
+    tasksToday: {
       type: Number,
       required: true,
+      default: 0,
     },
   },
   data() {
@@ -39,8 +38,8 @@ export default {
     },
   },
   watch: {
-    completedTasksToday(value) {
-      console.log(`In completedTasksToday() watcher`);
+    tasksToday(value) {
+      console.log('In StreakCounter, tasksToday() watcher');
       console.log(value);
       const dailyGoal = 1;
       const goalMet = dailyGoal === value;
