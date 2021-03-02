@@ -3,14 +3,10 @@
     <div class="header-item" id="title-wrapper">
       <img src="./assets/vanguard-pro-logo-long-transparent.png"/>
     </div>
-    <div class="header-item" id="game-tracker">
-      <game-tracker
-        @apply-gem-penalty="ApplyGemPenalty"
-      ></game-tracker>
-    </div>
     <div class="header-item" id="stat-counters">
       <stat-counters
         :stat="stats"
+        @apply-gem-penalty="ApplyGemPenalty"
       ></stat-counters>
     </div>
     <div class="header-item" id="streak-counter">
@@ -264,7 +260,6 @@ Header Styles
 }
 
 #streak-counter,
-#game-tracker,
 #stat-counters {
   font-family: 'Fira Code', monospace;
 }

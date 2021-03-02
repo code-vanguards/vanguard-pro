@@ -1,12 +1,6 @@
 <template>
-  <!--<p
-    v-for="playDay in PlayTimeDays"
-    :key="playDay.date"
-  >
-    {{playDay.date}}: {{playDay.minutesPlayed}}
-
-  </p>-->
-  Minutes played today: {{PlayTimeDays[0].minutesPlayed}}
+  <img src="../assets/gamepad.png" />
+  <span>{{PlayTimeDays[0].minutesPlayed}}</span>
 </template>
 
 <script>
@@ -30,7 +24,7 @@ export default {
         }
 
       ],
-      
+
       //playTime: '',
     }
   },
@@ -54,7 +48,7 @@ export default {
       //const query = "https://jsonplaceholder.typicode.com/users";
       //const query = `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${key}&steamid=${profileID}&format=json`;
 
-      
+
       const SteamAPI = require('steamapi');
       const steam = new SteamAPI(key);
 
@@ -62,15 +56,15 @@ export default {
         console.log(summary);
       })
 
-      
+
       fetch("https://steamcommunity.com/id/mrbru3/").then(response => {
         return response.json();
       }).then(users => {
         console.log(users)
       })
-      
+
     //const htmlDoc = '';
-      
+
       fetch('https://percy.tech/hackathon/result.html')
     .then(function (response) {
         switch (response.status) {
@@ -135,7 +129,7 @@ export default {
 
                 //remove 5 rupees for 5 minutes
                 this.$emit('apply-gem-penalty', 5);
-                
+
 
               }
               else
@@ -168,3 +162,11 @@ export default {
 
 };
 </script>
+
+<style scoped>
+img {
+  width:24px;
+  height: 24px;
+  margin-right: 5px;
+}
+</style>
