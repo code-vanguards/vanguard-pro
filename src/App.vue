@@ -59,6 +59,7 @@
         @edit-gems="editGems"
         @remove-task="removeTask"
         @edit-comment="editComment"
+        @rename-task="renameTask"
       ></task-info>
     </ul>
     <div id="no-tasks-wrapper" v-else>
@@ -148,6 +149,10 @@ export default {
     editComment(taskId, comment) {
       const theTask = this.findTask(taskId);
       theTask.comment = comment;
+    },
+    renameTask(taskId, name) {
+      const theTask = this.findTask(taskId);
+      theTask.name = name;
     },
     ApplyGemPenalty(penalty){
       this.stats.gems-= Number(penalty);

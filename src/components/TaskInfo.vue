@@ -1,7 +1,10 @@
 <template>
     <li class="task-list">
       <img class="li-item check-img" src="../assets/059-success.png" @click="completeTask"/>
-      <div class="li-item task-name">{{ task.name }}</div>
+      <div class="li-item task-name-wrapper">
+        <input type="text" v-if="isTaskNameInputVisible"/>
+        <div class="task-name" @click="toggleTaskNameInput" v-else>{{ task.name }}</div>
+      </div>
       <div class="li-item task-project dropdown-wrapper">
         <select @input="getProjectSelection" @click="hideDropdowns">
           <option disabled hidden selected>{{ task.project.name }}</option>
@@ -23,6 +26,7 @@
       <div class="li-item dropdown-wrapper">
         <img class="options-img" src="../assets/316-more.png" @click="toggleOptionsDropdown"/>
         <ul class="options-dropdown-content dropdown-content" v-if="isOptionsDropdownVisible">
+          <li @click="renameTask">Rename</li>
           <li @click="editComment">Comment</li>
           <li @click="$emit('remove-task', task.id)">Remove</li>
         </ul>
@@ -38,6 +42,7 @@ export default {
     'edit-gems',
     'edit-comment',
     'remove-task',
+    'rename-task',
   ],
   props: ['task', 'projects'],
   data() {
@@ -46,9 +51,11 @@ export default {
       maxGems: 99,
       gems: 0,
       comment: '',
+      name: '',
       projectSelection: {},
       isGemDropdownVisible: false,
       isOptionsDropdownVisible: false,
+      isTakeNameInputVisible: false,
     };
   },
   methods: {
@@ -87,6 +94,16 @@ export default {
         this.$emit('edit-comment', this.task.id, this.comment);
       }
     },
+    renameTask() {
+      this.hideDropdowns();
+      this.name = prompt('Edit Task Name', this.task.name);
+      if (this.name !== null) {
+        this.$emit('rename-task', this.task.id, this.name);
+      }
+    },
+    toggleTaskNameInput() {
+      this.isTaskNameInputVisible = !this.isTakeNameInputVisible;
+    },
   },
   watch: {
     projectSelection(value) {
@@ -115,12 +132,16 @@ img {
   clear: left;
 }
 
+
+.task-name-wrapper {
+  margin-right: auto;
+  margin-left: 20px;
+}
+
 .task-name {
   font-family: 'Fira Code', monospace;
   font-size: 1.3em;
   font-weight: 500;
-  margin-left: 20px;
-  margin-right: auto;
   color: #585858;
 }
 
