@@ -92,7 +92,6 @@ export default {
   },
   methods: {
     projectSelected(proj) {
-      console.log('In projectSelected.');
       this.projects.map(project => {
         if (project.id === proj.id) {
           project.isSelected = true;
@@ -150,15 +149,14 @@ export default {
       theTask.comment = comment;
     },
     ApplyGemPenalty(penalty){
-            this.stats.gems-= Number(penalty);
-            if(this.stats.gems < 0) this.stats.gems = 0;
+      this.stats.gems-= Number(penalty);
+      if(this.stats.gems < 0) this.stats.gems = 0;
     }
   },
   watch: {
     tasks: {
       deep: true,
       handler() {
-
       },
     },
     completedTasksToday(value) {
