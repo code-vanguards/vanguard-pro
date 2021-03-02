@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="addProject">
-    <label class="formItem">Add project</label>
+    <label class="formItem">Add Project</label>
     <input class="formItem" type="text" v-model="projectName"/>
     <button class="formItem">Add</button>
   </form>

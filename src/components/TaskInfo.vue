@@ -121,6 +121,7 @@ img {
   font-weight: 500;
   margin-left: 20px;
   margin-right: auto;
+  color: #585858;
 }
 
 .task-project {
