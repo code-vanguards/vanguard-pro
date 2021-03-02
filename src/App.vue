@@ -61,8 +61,8 @@
         @edit-comment="editComment"
       ></task-info>
     </ul>
-    <div v-else>
-      NO TASKS TO SHOW!
+    <div id="no-tasks-wrapper" v-else>
+      <img src="./assets/no-tasks.png"/>
     </div>
   </section>
 </template>
@@ -244,6 +244,14 @@ h2 { font-size: 1.4rem; }
       'leftPanel tasks';
 }
 
+#no-tasks-wrapper {
+  margin-top: 100px;
+}
+
+#no-tasks-wrapper > img {
+  display: block;
+  margin: 0 auto;
+}
 
 /*
 Header Styles
