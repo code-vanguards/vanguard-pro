@@ -6,7 +6,7 @@
         <div class="dropdown-wrapper">
           <img id="gems-img" title="Add Gems" src="../assets/197-diamond.png" class="img-btn" @click="toggleGemDropdown" />
           <div class="dropdown-content" v-show="isGemDropdownVisible">
-            <input type="number" min="0" v-model="task.gems" />
+            <input type="number" :min="minGems" :max="maxGems" v-model="task.gems" />
             <button @click="toggleGemDropdown">Ok</button>
           </div>
         </div>
@@ -36,6 +36,8 @@ export default {
   props: ['projects'],
   data() {
     return {
+      minGems: 0,
+      maxGems: 99,
       task: {
         name: '',
         comment: '',
@@ -49,13 +51,17 @@ export default {
   methods: {
     addTask() {
       if (this.task.name) {
-        if(this.task.projectId) {
-          this.task.projectId = Number(this.task.projectId);
-          this.$emit('add-task', this.task);
-          this.task.name = '';
-          this.task.comment = '';
-          this.task.gems = 0;
-          this.hideDropdowns();
+        if (this.task.projectId) {
+          if (this.task.gems >= this.minGems && this.task.gems <= this.maxGems) {
+            this.task.projectId = Number(this.task.projectId);
+            this.$emit('add-task', this.task);
+            this.task.name = '';
+            this.task.comment = '';
+            this.task.gems = 0;
+            this.hideDropdowns();
+          } else {
+            alert(`Amount of gems must be between ${this.minGems} and ${this.maxGems}`);
+          }
         } else {
           alert("Please select a project. Create a new project if needed.");
         }
