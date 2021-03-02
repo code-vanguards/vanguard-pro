@@ -32,16 +32,14 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #0ed145;
   padding: 5px 10px 10px 10px;
-  border-radius: 10px;
   width: 85%;
   margin: 25px auto;
   text-align: center;
 }
 
 form > .formItem {
-  margin-top: 5px;
+  margin: 5px 0;
 }
 
 form label {
