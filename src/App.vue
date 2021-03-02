@@ -7,12 +7,9 @@
     <div>
       <game-tracker
         @apply-gem-penalty="ApplyGemPenalty"
-      
-      
       ></game-tracker>
     </div>
     <div>
-      <!--Code for the counters-->
       <stat-counters
         :stat="stats"
       ></stat-counters>
@@ -39,20 +36,6 @@
         :project="project"
         @project-selected="projectSelected"
       ></project-info>
-      <!--
-      <li class="list-item" @click="projectSelected({id: 0, isSelected: true, name: 'All'})">
-        <img src="./assets/176-windows.png" />
-        <span>All</span>
-      </li>
-      <li class="list-item" @click="projectSelected({id: 1, isSelected: true, name: 'Tomorrow'})">
-        <img src="./assets/sun.png" />
-        <span>Tomorrow</span>
-      </li>
-      <li class="list-item" @click="projectSelected({id: 2, isSelected: true, name: 'Upcoming'})">
-        <img src="./assets/224-clock.png" />
-        <span>Upcoming</span>
-      </li>
-      -->
     </ul>
     <div class='spacer'></div>
     <ul class="item">
