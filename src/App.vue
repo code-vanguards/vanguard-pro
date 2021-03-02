@@ -122,10 +122,8 @@ export default {
     completeTask(taskId) {
       const theTask = this.findTask(taskId);
       theTask.isCompleted = true;
-      this.stats.completedTasks +=1;
       this.completedTasksToday++;
-      this.stats.uncompletedTasks-=1;
-      this.stats.gems+= Number(theTask.gems);
+      this.stats.gems += Number(theTask.gems);
     },
     selectTaskProject(taskId, project) {
       const theTask = this.findTask(taskId);
@@ -151,12 +149,21 @@ export default {
     ApplyGemPenalty(penalty){
       this.stats.gems-= Number(penalty);
       if(this.stats.gems < 0) this.stats.gems = 0;
-    }
+    },
+    countCompletedTasks() {
+      let count = 0;
+      this.tasks.forEach(item => {
+        count += (item.isCompleted ? 1 : 0);
+      });
+      this.stats.completedTasks = count;
+      this.stats.uncompletedTasks = this.tasks.length - count;
+    },
   },
   watch: {
     tasks: {
       deep: true,
       handler() {
+        this.countCompletedTasks();
       },
     },
     completedTasksToday(value) {
