@@ -102,7 +102,7 @@ export default {
       this.projFilter = proj;
     },
     addTask(task) {
-      const foundProject = this.projects.find(project => project.name === task.projectName);
+      const foundProject = this.projects.find(project => project.id === task.projectId);
       this.tasks.push(taskFactory(
         task.name,
         undefined,

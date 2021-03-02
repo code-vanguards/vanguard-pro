@@ -23,7 +23,7 @@
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
       <select @click="hideDropdowns" @input="getProjectSelection">
         <option disabled hidden selected>Select Project</option>
-        <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
+        <option v-for="project in projects" :value="project.id" :key="project.id">{{ project.name }}</option>
       </select>
       <button>Add</button>
     </form>
@@ -39,7 +39,7 @@ export default {
       task: {
         name: '',
         comment: '',
-        projectName: '',
+        projectId: 0,
         gems: 0,
       },
       isCommentDropdownVisible: false,
@@ -49,7 +49,8 @@ export default {
   methods: {
     addTask() {
       if (this.task.name) {
-        if(this.task.projectName) {
+        if(this.task.projectId) {
+          this.task.projectId = Number(this.task.projectId);
           this.$emit('add-task', this.task);
           this.task.name = '';
           this.task.comment = '';
@@ -75,7 +76,7 @@ export default {
       this.isCommentDropdownVisible = false;
     },
     getProjectSelection(event) {
-      this.task.projectName = event.target.value;
+      this.task.projectId = event.target.value;
     },
   },
   watch: {
