@@ -54,7 +54,11 @@ form label {
 form input {
   border-radius: 5px;
   border-style: none;
-  padding: 5px;
+  padding: 7px;
+  font-size: 0.85rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 500;
+  color: #585858;
 }
 
 form button {

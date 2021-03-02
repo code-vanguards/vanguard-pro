@@ -102,12 +102,17 @@ header {
   align-items: center;
 }
 
-input {
+input,
+select {
   border-radius: 5px;
   border-style: none;
   width: 70%;
-  padding: 3px;
+  padding: 7px;
   background: #f0f0f0;
+  font-size: 0.85rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 500;
+  color: #585858;
 }
 
 form {
@@ -145,6 +150,5 @@ select {
   background-color: #f0f0f0;
   border: none;
   outline: none;
-  color: black;
 }
 </style>

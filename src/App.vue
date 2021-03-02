@@ -177,7 +177,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Roboto&family=Fira+Code:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Roboto&family=Fira+Code:wght@400;500;700&display=swap');
 /* How to use the font above:
   font-family: 'Jost', sans-serif;
   font-family: 'Roboto', sans-serif;
