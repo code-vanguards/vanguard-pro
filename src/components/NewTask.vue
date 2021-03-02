@@ -21,8 +21,8 @@
     </header>
     <form @submit.prevent="addTask">
       <input type="text" @click="hideDropdowns" v-model="task.name"/>
-      <select @click="hideDropdowns" v-model="task.projectName">
-        <option disabled selected>Select a Project</option>
+      <select @click="hideDropdowns" @input="getProjectSelection">
+        <option disabled hidden selected>Select Project</option>
         <option v-for="project in projects" :key="project.id">{{ project.name }}</option>
       </select>
       <button>Add</button>
@@ -53,7 +53,6 @@ export default {
           this.$emit('add-task', this.task);
           this.task.name = '';
           this.task.comment = '';
-          this.task.projectName = '';
           this.task.gems = 0;
           this.hideDropdowns();
         } else {
@@ -74,7 +73,10 @@ export default {
     toggleGemDropdown() {
       this.isGemDropdownVisible = !this.isGemDropdownVisible;
       this.isCommentDropdownVisible = false;
-    }
+    },
+    getProjectSelection(event) {
+      this.task.projectName = event.target.value;
+    },
   },
   watch: {
     projectName(value) {
