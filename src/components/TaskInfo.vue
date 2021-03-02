@@ -116,8 +116,9 @@ img {
 }
 
 .task-name {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.35em;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3em;
+  font-weight: 500;
   margin-left: 20px;
   margin-right: auto;
 }
