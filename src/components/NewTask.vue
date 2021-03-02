@@ -153,5 +153,6 @@ select {
   border: none;
   outline: none;
   width: 140px;
+  font-weight: bold;
 }
 </style>
