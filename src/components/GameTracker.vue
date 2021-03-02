@@ -12,6 +12,7 @@
 <script>
 export default {
 
+  emits: ['apply-gem-penalty'],
   beforeMount(){
     this.startSteam();
   },
@@ -36,10 +37,10 @@ export default {
   methods:{
 
     startSteam(){
-      new Date()
+      //new Date()
       //console.log(this.PlayTimeDays[1].date)
       this.retrieveInfo();
-      setInterval(this.retrieveInfo,300000);//300000);//150000);//300000);
+      setInterval(this.retrieveInfo,300000);//15000);//300000);//300000);//150000);//300000);
     },
     retrieveInfo(){
       const debug = false;
@@ -133,7 +134,7 @@ export default {
                 alert("You're playing too much! were gonna have to take some gems!")
 
                 //remove 5 rupees for 5 minutes
-
+                this.$emit('apply-gem-penalty', 5);
                 
 
               }

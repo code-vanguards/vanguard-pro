@@ -5,7 +5,11 @@
       <h1>Vanguard Pro</h1>
     </div>
     <div>
-      <game-tracker></game-tracker>
+      <game-tracker
+        @apply-gem-penalty="ApplyGemPenalty"
+      
+      
+      ></game-tracker>
     </div>
     <div>
       <!--Code for the counters-->
@@ -128,6 +132,10 @@ export default {
     editComment(taskId, comment) {
       const theTask = this.findTask(taskId);
       theTask.comment = comment;
+    },
+    ApplyGemPenalty(penalty){
+            this.stats.gems-= Number(penalty);
+            if(this.stats.gems < 0) this.stats.gems = 0;
     }
   },
   watch: {
