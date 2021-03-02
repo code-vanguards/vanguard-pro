@@ -79,7 +79,7 @@ export default {
         gems: 0,
       },
       projects: [
-        projectFactory('All', '176-windows.png', '176-windows.png'),
+        projectFactory('All', '176-windows.png', '176-windows.png', true),
         projectFactory('Tomorrow', 'sun.png', 'sun.png'),
         projectFactory('Upcoming', '224-clock.png', '224-clock.png'),
         projectFactory('School'),
