@@ -165,8 +165,6 @@ export default {
 
 <style scoped>
 img {
-  width:24px;
-  height: 24px;
   margin-right: 5px;
 }
 </style>

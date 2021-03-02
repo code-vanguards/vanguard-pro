@@ -233,6 +233,7 @@ Header Styles
   background-color: #00a8f3;
   grid-area: head;
   padding-left: 10px;
+  user-select: none;
 }
 
 .header-item {
@@ -244,9 +245,10 @@ Header Styles
   font-weight: bold;
 }
 
-.header-item > img {
+.header-item img {
   width: 24px;
   height: 24px;
+  pointer-events: none;
 }
 
 #title-wrapper > img {
