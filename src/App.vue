@@ -80,8 +80,8 @@ export default {
       },
       projects: [
         projectFactory('All', '176-windows.png', '176-windows.png', true, 1),
-        projectFactory('Tomorrow', 'sun.png', 'sun.png', 2),
-        projectFactory('Upcoming', '224-clock.png', '224-clock.png', 3),
+        projectFactory('Tomorrow', 'sun.png', 'sun.png', false, 2),
+        projectFactory('Upcoming', '224-clock.png', '224-clock.png', false, 3),
         projectFactory('School'),
         projectFactory('Work'),
         projectFactory('Chores'),
