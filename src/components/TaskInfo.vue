@@ -90,7 +90,13 @@ export default {
   },
   computed: {
     filterRule() {
-      return (!this.task.isCompleted) && (this.task.project.id === this.projectFilter.id);
+      let filterProject;
+      if (this.projectFilter.id === 1) {
+        filterProject = true;
+      } else {
+        filterProject = this.task.project.id === this.projectFilter.id;
+      }
+      return (!this.task.isCompleted) && filterProject;
     },
   },
   watch: {

@@ -70,22 +70,23 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 
 export default {
   data() {
-    return {
-      projFilter: {},
-      completedTasksToday: 0,
-      stats: {
-        uncompletedTasks: 0,
-        completedTasks: 0,
-        gems: 0,
-      },
-      projects: [
+    const initialProjects = [
         projectFactory('All', '176-windows.png', '176-windows.png', true, 1),
         projectFactory('Tomorrow', 'sun.png', 'sun.png', false, 2),
         projectFactory('Upcoming', '224-clock.png', '224-clock.png', false, 3),
         projectFactory('School'),
         projectFactory('Work'),
         projectFactory('Chores'),
-      ],
+    ];
+    return {
+      completedTasksToday: 0,
+      stats: {
+        uncompletedTasks: 0,
+        completedTasks: 0,
+        gems: 0,
+      },
+      projects: initialProjects,
+      projFilter: initialProjects[0],
       tasks: [],
     };
   },
