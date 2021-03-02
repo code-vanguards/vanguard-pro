@@ -36,7 +36,7 @@ form {
   padding: 5px 10px 10px 10px;
   border-radius: 10px;
   width: 85%;
-  margin: auto;
+  margin: 25px auto;
   text-align: center;
 }
 

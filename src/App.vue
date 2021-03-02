@@ -28,19 +28,41 @@
         @add-project="addProject"
       ></new-project>
     </div>
-    <div class="spacer"></div>
     <ul class="item">
-      <project-info
-        v-for="project in projects"
+      <project-info class="list-item"
+        v-for="project in projects.slice(0, 3)"
         :key="project.id"
         :project="project"
-        @projectFilter="projectFilter"
+        @project-selected="projectSelected"
+      ></project-info>
+      <!--
+      <li class="list-item" @click="projectSelected({id: 0, isSelected: true, name: 'All'})">
+        <img src="./assets/176-windows.png" />
+        <span>All</span>
+      </li>
+      <li class="list-item" @click="projectSelected({id: 1, isSelected: true, name: 'Tomorrow'})">
+        <img src="./assets/sun.png" />
+        <span>Tomorrow</span>
+      </li>
+      <li class="list-item" @click="projectSelected({id: 2, isSelected: true, name: 'Upcoming'})">
+        <img src="./assets/224-clock.png" />
+        <span>Upcoming</span>
+      </li>
+      -->
+    </ul>
+    <div class='spacer'></div>
+    <ul class="item">
+      <project-info class="list-item"
+        v-for="project in projects.slice(3)"
+        :key="project.id"
+        :project="project"
+        @project-selected="projectSelected"
       ></project-info>
     </ul>
   </section>
   <section id="tasks-area">
     <new-task
-      :projects="projects"
+      :projects="projects.slice(3)"
       @add-task="addTask"
     ></new-task>
     <ul class="tasks-list">
@@ -48,7 +70,7 @@
         v-for="task in tasks"
         :key="task.id"
         :task="task"
-        :projects="projects"
+        :projects="projects.slice(3)"
         :projectFilter="projFilter"
         @complete-task="completeTask"
         @select-task-project="selectTaskProject"
@@ -74,6 +96,9 @@ export default {
         gems: 0,
       },
       projects: [
+        projectFactory('All', '176-windows.png', '176-windows.png'),
+        projectFactory('Tomorrow', 'sun.png', 'sun.png'),
+        projectFactory('Upcoming', '224-clock.png', '224-clock.png'),
         projectFactory('School'),
         projectFactory('Work'),
         projectFactory('Chores'),
@@ -82,7 +107,15 @@ export default {
     };
   },
   methods: {
-    projectFilter(proj){
+    projectSelected(proj) {
+      console.log('In projectSelected.');
+      this.projects.map(project => {
+        if (project.id === proj.id) {
+          project.isSelected = true;
+        } else {
+          project.isSelected = false;
+        }
+      });
       this.projFilter = proj;
     },
     addTask(task) {
@@ -125,6 +158,9 @@ export default {
     findTask(taskId) {
       return this.tasks.find(task => task.id === taskId);
     },
+    findProj(projId) {
+      return this.projects.find(proj => proj.id === projId);
+    },
     editComment(taskId, comment) {
       const theTask = this.findTask(taskId);
       theTask.comment = comment;
@@ -134,6 +170,7 @@ export default {
     tasks: {
       deep: true,
       handler() {
+
       },
     },
     completedTasksToday(value) {
@@ -216,22 +253,46 @@ Left panel
   align-items: center;
 }
 
-#left-panel > .item {
-  margin-top: 20px;
-}
-
 #left-panel > ul {
   width: 100%;
 }
 
-#left-panel > .spacer {
+#left-panel .list-item {
+  list-style: none;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  color: #f0f0f0;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.3rem;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
 
+#left-panel .list-item:hover {
+  background-color: #009ee4;
+}
+
+#left-panel .spacer {
+  border: 1px solid #005a82;
+  width: 95%;
+  margin: 10px auto;
+  height: 2px;
+  border-radius: 1px;
 }
 
 #tasks-area {
   background-color: #f0f0f0;
   grid-area: tasks;
   padding: 2rem 5rem;
+}
+
+.list-item img {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
 }
 
 .img-btn {
