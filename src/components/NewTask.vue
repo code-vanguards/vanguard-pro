@@ -150,5 +150,6 @@ select {
   background-color: #f0f0f0;
   border: none;
   outline: none;
+  width: 140px;
 }
 </style>
