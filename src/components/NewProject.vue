@@ -45,6 +45,9 @@ form > .formItem {
 }
 
 form label {
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
   color: #f0f0f0;
 }
 
