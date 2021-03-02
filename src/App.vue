@@ -1,25 +1,25 @@
 <template>
   <header id="header-info">
-    <div class="app-title">
-      <!-- Logo Goes Here -->
-      <h1>Vanguard Pro</h1>
+    <div class="header-item" id="title-wrapper">
+      <img src="./assets/vanguard-pro-logo-long-transparent.png"/>
     </div>
-    <div>
+    <div class="header-item" id="game-tracker">
       <game-tracker
         @apply-gem-penalty="ApplyGemPenalty"
       ></game-tracker>
     </div>
-    <div>
+    <div class="header-item" id="stat-counters">
       <stat-counters
         :stat="stats"
       ></stat-counters>
     </div>
-    <div>
+    <div class="header-item" id="streak-counter">
+      <img src="./assets/100-fire.png" />
       <streak-counter
         :tasksToday="completedTasksToday"
       ></streak-counter>
     </div>
-    <div>
+    <div class="header-item" id="date-display">
       <date-display></date-display>
     </div>
   </header>
@@ -181,10 +181,11 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Roboto&family=Fira+Code:wght@400;700&display=swap');
 /* How to use the font above:
   font-family: 'Jost', sans-serif;
   font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Code', monospace;
 */
 
 * {
@@ -220,6 +221,16 @@ h2 { font-size: 1.4rem; }
       'leftPanel tasks';
 }
 
+
+/*
+Header Styles
+=============
+*/
+#title-wrapper {
+  display: flex;
+  margin-right: auto;
+}
+
 #header-info {
   display: flex;
   align-items: center;
@@ -228,8 +239,42 @@ h2 { font-size: 1.4rem; }
   padding-left: 10px;
 }
 
-.app-title {
-  margin-right: auto;
+.header-item {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  height: 100%;
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+.header-item > img {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+#title-wrapper > img {
+  width: 100px;
+  height: 47px;
+}
+
+#date-display {
+  background-color: salmon;
+  font-family: 'Jost', sans-serif;
+}
+
+#streak-counter,
+#game-tracker,
+#stat-counters {
+  font-family: 'Fira Code', monospace;
+}
+
+#streak-counter {
+  background-color: #cf393f;
+}
+
+#streak-counter > img {
 }
 
 /*
