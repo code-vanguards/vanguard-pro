@@ -155,7 +155,7 @@ export default {
       theTask.name = name;
     },
     ApplyGemPenalty(penalty){
-      this.stats.gems-= Number(penalty);
+      this.stats.gems -= Number(penalty);
       if(this.stats.gems < 0) this.stats.gems = 0;
     },
     countCompletedTasks() {

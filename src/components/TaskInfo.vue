@@ -1,10 +1,7 @@
 <template>
     <li class="task-list">
       <img class="li-item check-img" src="../assets/059-success.png" @click="completeTask"/>
-      <div class="li-item task-name-wrapper">
-        <input type="text" v-if="isTaskNameInputVisible"/>
-        <div class="task-name" @click="toggleTaskNameInput" v-else>{{ task.name }}</div>
-      </div>
+      <div class="li-item task-name">{{ task.name }}</div>
       <div class="li-item task-project dropdown-wrapper">
         <select @input="getProjectSelection" @click="hideDropdowns">
           <option disabled hidden selected>{{ task.project.name }}</option>
@@ -132,17 +129,13 @@ img {
   clear: left;
 }
 
-
-.task-name-wrapper {
-  margin-right: auto;
-  margin-left: 20px;
-}
-
 .task-name {
   font-family: 'Fira Code', monospace;
   font-size: 1.3em;
   font-weight: 500;
   color: #585858;
+  margin-right: auto;
+  margin-left: 20px;
 }
 
 .task-project {
