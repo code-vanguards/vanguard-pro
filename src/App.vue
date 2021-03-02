@@ -251,7 +251,6 @@ Header Styles
 .header-item > img {
   width: 24px;
   height: 24px;
-  margin-right: 5px;
 }
 
 #title-wrapper > img {
@@ -275,6 +274,7 @@ Header Styles
 }
 
 #streak-counter > img {
+  margin-right: 5px;
 }
 
 /*

@@ -1,31 +1,38 @@
 <template>
-  <span>
-    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
-    {{stat.uncompletedTasks}} uncompleted
-    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
-    {{stat.completedTasks}} completed
-    <img title="Stat Counters" src="../assets/023-archive.png" class="stat-icon"/>
-    {{stat.gems}} gems
-  </span>
-
-
+  <div class="stat-item" id="uncompleted-stat">
+    <img title="Stat Counters" src="../assets/058-error.png" class="stat-icon"/>
+    <span>{{stat.uncompletedTasks}}</span>
+  </div>
+  <div class="stat-item" id="completed-stat">
+    <img title="Stat Counters" src="../assets/059-success.png" class="stat-icon"/>
+    <span>{{stat.completedTasks}}</span>
+  </div>
+  <div class="stat-item" id="gems-stat">
+    <img title="Stat Counters" src="../assets/197-diamond.png" class="stat-icon"/>
+    {{stat.gems}}
+  </div>
 </template>
 
 <script>
 export default {
-
   props:['stat'],
-  data(){
-    return{
-  };
-  },
-  methods:{
-  },
 };
 </script>
 
 <style scoped>
-img{
+img {
   width:24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+#gems-stat {
+  margin-right: 0;
 }
 </style>
