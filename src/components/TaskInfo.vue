@@ -1,5 +1,5 @@
 <template>
-    <li class="task-list" v-if="filterRule">
+    <li class="task-list">
       <img class="li-item check-img" src="../assets/059-success.png" @click="completeTask"/>
       <div class="li-item task-name">{{ task.name }}</div>
       <div class="li-item task-project dropdown-wrapper">
@@ -39,7 +39,7 @@ export default {
     'edit-comment',
     'remove-task',
   ],
-  props: ['task', 'projects', 'projectFilter'],
+  props: ['task', 'projects'],
   data() {
     return {
       minGems: 0,
@@ -86,17 +86,6 @@ export default {
       if (this.comment !== null) {
         this.$emit('edit-comment', this.task.id, this.comment);
       }
-    },
-  },
-  computed: {
-    filterRule() {
-      let filterProject;
-      if (this.projectFilter.id === 1) {
-        filterProject = true;
-      } else {
-        filterProject = this.task.project.id === this.projectFilter.id;
-      }
-      return (!this.task.isCompleted) && filterProject;
     },
   },
   watch: {

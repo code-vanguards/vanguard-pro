@@ -48,13 +48,12 @@
       :projects="projects.slice(3)"
       @add-task="addTask"
     ></new-task>
-    <ul class="tasks-list">
+    <ul class="tasks-list" v-if="filteredTasks.length > 0">
       <task-info
-        v-for="task in tasks"
+        v-for="task in filteredTasks"
         :key="task.id"
         :task="task"
         :projects="projects.slice(3)"
-        :projectFilter="projFilter"
         @complete-task="completeTask"
         @select-task-project="selectTaskProject"
         @edit-gems="editGems"
@@ -62,6 +61,9 @@
         @edit-comment="editComment"
       ></task-info>
     </ul>
+    <div v-else>
+      NO TASKS TO SHOW!
+    </div>
   </section>
 </template>
 
@@ -86,8 +88,9 @@ export default {
         gems: 0,
       },
       projects: initialProjects,
-      projFilter: initialProjects[0],
+      projFilterId: initialProjects[0].id,
       tasks: [],
+      filteredTasks: [],
     };
   },
   methods: {
@@ -99,7 +102,7 @@ export default {
           project.isSelected = false;
         }
       });
-      this.projFilter = proj;
+      this.projFilterId = proj.id;
     },
     addTask(task) {
       const foundProject = this.projects.find(project => project.id === task.projectId);
@@ -158,13 +161,31 @@ export default {
       this.stats.completedTasks = count;
       this.stats.uncompletedTasks = this.tasks.length - count;
     },
+    filterTasksByProject(tasks, projectId) {
+      if (projectId === 1) {
+        return tasks;
+      } else {
+        return tasks.filter(task => task.project.id === projectId);
+      }
+    },
+    filterTasksByCompletion(tasks, completionStatus=false) {
+      return tasks.filter(task => task.isCompleted === completionStatus);
+    },
+    filterTasks() {
+      let results = this.filterTasksByProject(this.tasks, this.projFilterId);
+      this.filteredTasks = this.filterTasksByCompletion(results);
+    },
   },
   watch: {
     tasks: {
       deep: true,
       handler() {
         this.countCompletedTasks();
+        this.filterTasks();
       },
+    },
+    projFilterId() {
+      this.filterTasks();
     },
     completedTasksToday(value) {
       console.log('In App, completedTasksToday() watcher...');
