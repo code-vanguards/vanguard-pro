@@ -103,7 +103,7 @@ export default {
   width: 50rem;
   text-align: center;
   margin-bottom: 4rem;
-  background-color: #0ed145;
+  background-color: darkcyan;
 }
 
 header {
