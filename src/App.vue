@@ -158,7 +158,7 @@ export default {
     },
     ApplyGemPenalty(penalty){
       this.stats.gems -= Number(penalty);
-      if(this.stats.gems < 0) this.stats.gems = 0;
+      //if(this.stats.gems < 0) this.stats.gems = 0;
     },
     countCompletedTasks() {
       let count = 0;
