@@ -3,6 +3,7 @@
     <div class="header-item" id="title-wrapper">
       <img src="./assets/vanguard-pro-logo-long-transparent.png"/>
     </div>
+    <img id="title-right-arrow" src="./assets/right-arrow.png"/>
     <div class="header-item" id="stat-counters">
       <stat-counters
         :stat="stats"
@@ -280,7 +281,17 @@ Header Styles
 */
 #title-wrapper {
   display: flex;
+  background-color: lightskyblue;
+}
+
+#title-wrapper > img {
+  width: 100px;
+  height: 47px;
+}
+
+#title-right-arrow {
   margin-right: auto;
+  width: 26px;
 }
 
 #header-info {
@@ -288,7 +299,6 @@ Header Styles
   align-items: center;
   background-color: #00a8f3;
   grid-area: head;
-  padding-left: 10px;
   user-select: none;
 }
 
@@ -305,11 +315,6 @@ Header Styles
   width: 24px;
   height: 24px;
   pointer-events: none;
-}
-
-#title-wrapper > img {
-  width: 100px;
-  height: 47px;
 }
 
 #date-display {
