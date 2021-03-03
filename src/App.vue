@@ -196,6 +196,12 @@ export default {
       console.log('In App, completedTasksToday() watcher...');
       console.log(value);
     },
+    stats: {
+      deep: true,
+      handler(value) {
+        if (value.gems < 0) this.stats.gems = 0;
+      },
+    },
   },
   mounted() {
     setInterval(() => {

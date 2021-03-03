@@ -44,9 +44,9 @@ export default {
   props: ['task', 'projects'],
   data() {
     return {
-      minGems: 0,
-      maxGems: 99,
-      gems: 0,
+      minGems: 1,
+      maxGems: 20,
+      gems: 1,
       comment: '',
       name: '',
       projectSelection: {},

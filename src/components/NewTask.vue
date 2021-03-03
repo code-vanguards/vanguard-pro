@@ -36,13 +36,13 @@ export default {
   props: ['projects'],
   data() {
     return {
-      minGems: 0,
-      maxGems: 99,
+      minGems: 1,
+      maxGems: 20,
       task: {
         name: '',
         comment: '',
         projectId: 0,
-        gems: 0,
+        gems: 1,
       },
       isCommentDropdownVisible: false,
       isGemDropdownVisible: false,
@@ -57,7 +57,7 @@ export default {
             this.$emit('add-task', this.task);
             this.task.name = '';
             this.task.comment = '';
-            this.task.gems = 0;
+            this.task.gems = 1;
             this.hideDropdowns();
           } else {
             alert(`Amount of gems must be between ${this.minGems} and ${this.maxGems}`);
