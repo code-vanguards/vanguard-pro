@@ -40,6 +40,8 @@
         :key="project.id"
         :project="project"
         @project-selected="projectSelected"
+        @remove-project="removeProject"
+        @rename-project="renameProject"
       ></project-info>
     </ul>
   </section>
@@ -74,9 +76,9 @@ import { taskFactory, projectFactory } from './lib/factories.js';
 export default {
   data() {
     const initialProjects = [
-        projectFactory('All', '176-windows.png', '176-windows.png', true, 1),
-        projectFactory('Tomorrow', 'sun.png', 'sun.png', false, 2),
-        projectFactory('Upcoming', '224-clock.png', '224-clock.png', false, 3),
+        projectFactory('All', '176-windows.png', '176-windows.png', true, false, 1),
+        projectFactory('Tomorrow', 'sun.png', 'sun.png', false, false, 2),
+        projectFactory('Upcoming', '224-clock.png', '224-clock.png', false, false, 3),
         projectFactory('School'),
         projectFactory('Work'),
         projectFactory('Chores'),
@@ -179,6 +181,14 @@ export default {
     filterTasks() {
       let results = this.filterTasksByProject(this.tasks, this.projFilterId);
       this.filteredTasks = this.filterTasksByCompletion(results);
+    },
+    removeProject(projectId) {
+      this.tasks = this.tasks.filter(task => task.project.id !== projectId);
+      this.projects = this.projects.filter(project => project.id !== projectId)
+    },
+    renameProject(projectId, newName) {
+      const theProject = this.findProj(projectId);
+      theProject.name = newName;
     },
   },
   watch: {

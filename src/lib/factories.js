@@ -14,10 +14,11 @@ export function taskFactory(name, dueDate, comment='', project={}, gems=1, isCom
 }
 
 // Creates new project objects. Makes it easier and keeps objects consistent.
-export function projectFactory(name, imageDefault="blue-dot.png", imageClicked="red-dot.png", isSelected=false, id=generateId(100, 1000000)) {
+export function projectFactory(name, imageDefault="blue-dot.png", imageClicked="red-dot.png", isSelected=false, showOptions=true, id=generateId(100, 1000000)) {
   return {
     id,
     isSelected,
+    showOptions,
     imageDefault,
     imageClicked,
     name: name.toLowerCase(),
