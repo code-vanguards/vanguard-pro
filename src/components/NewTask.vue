@@ -57,7 +57,7 @@ export default {
             this.$emit('add-task', this.task);
             this.task.name = '';
             this.task.comment = '';
-            this.task.gems = 1;
+            this.task.gems = this.minGems;
             this.hideDropdowns();
           } else {
             alert(`Amount of gems must be between ${this.minGems} and ${this.maxGems}`);
@@ -86,10 +86,10 @@ export default {
     },
   },
   watch: {
-    projectName(value) {
-      console.log(value);
-    }
-  }
+    projects(value) {
+      this.task.projectId = value[0].id;
+    },
+  },
 };
 </script>
 
