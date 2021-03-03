@@ -34,7 +34,7 @@ form {
   align-items: center;
   padding: 5px 10px 10px 10px;
   width: 85%;
-  margin: 25px auto;
+  margin: 10px auto 0 auto;
   text-align: center;
 }
 

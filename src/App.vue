@@ -25,6 +25,7 @@
         @add-project="addProject"
       ></new-project>
     </div>
+    <div class='spacer'></div>
     <ul class="item">
       <project-info class="list-item"
         v-for="project in projects.slice(0, 3)"
