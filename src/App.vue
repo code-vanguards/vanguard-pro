@@ -9,7 +9,7 @@
         @apply-gem-penalty="ApplyGemPenalty"
       ></stat-counters>
     </div>
-    <div class="header-item" id="streak-counter">
+    <div class="header-item" title="Complete tasks everyday and grow your streak!" id="streak-counter">
       <img src="./assets/100-fire.png" />
       <streak-counter
         :tasksToday="completedTasksToday"

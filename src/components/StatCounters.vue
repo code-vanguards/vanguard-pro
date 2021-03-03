@@ -1,18 +1,18 @@
 <template>
-  <div class="stat-item" id="game-tracker">
+  <div class="stat-item" title="Your current game session in minutes." id="game-tracker">
     <game-tracker
       @apply-gem-penalty="$emit('apply-gem-penalty', penalty)"
     ></game-tracker>
   </div>
-  <div class="stat-item" id="uncompleted-stat">
+  <div class="stat-item" title="Number of uncompleted tasks." id="uncompleted-stat">
     <img title="Stat Counters" src="../assets/058-error.png" class="stat-icon"/>
     <span>{{stat.uncompletedTasks}}</span>
   </div>
-  <div class="stat-item" id="completed-stat">
+  <div class="stat-item" title="Number of completed tasks." id="completed-stat">
     <img title="Stat Counters" src="../assets/059-success.png" class="stat-icon"/>
     <span>{{stat.completedTasks}}</span>
   </div>
-  <div class="stat-item" id="gems-stat">
+  <div class="stat-item" title="The amount of gems you have." id="gems-stat">
     <img title="Stat Counters" src="../assets/197-diamond.png" class="stat-icon"/>
     {{stat.gems}}
   </div>
