@@ -25,7 +25,7 @@ export default {
       this.isOptionsDropdownVisible = false;
     },
     projectSelected() {
-      this.$emit('project-selected', this.project);
+      this.$emit('project-selected', this.project.id);
     },
     toggleOptionsDropdown() {
       this.isOptionsDropdownVisible = !this.isOptionsDropdownVisible;
@@ -40,7 +40,9 @@ export default {
     removeProject() {
       this.hideDropdowns();
       let confirmed = confirm('This will delete all tasks that belong to the project. Are you sure?');
-      if (confirmed) this.$emit('remove-project', this.project.id);
+      if (confirmed) {
+        this.$emit('remove-project', this.project.id);
+      }
     },
   },
   computed: {

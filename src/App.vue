@@ -97,15 +97,15 @@ export default {
     };
   },
   methods: {
-    projectSelected(proj) {
+    projectSelected(projectId) {
       this.projects.map(project => {
-        if (project.id === proj.id) {
+        if (project.id === projectId) {
           project.isSelected = true;
         } else {
           project.isSelected = false;
         }
       });
-      this.projFilterId = proj.id;
+      this.projFilterId = projectId;
     },
     addTask(task) {
       const foundProject = this.projects.find(project => project.id === task.projectId);
@@ -183,7 +183,7 @@ export default {
     },
     removeProject(projectId) {
       this.tasks = this.tasks.filter(task => task.project.id !== projectId);
-      this.projects = this.projects.filter(project => project.id !== projectId)
+      this.projects = this.projects.filter(project => project.id !== projectId);
     },
     renameProject(projectId, newName) {
       const theProject = this.findProj(projectId);
