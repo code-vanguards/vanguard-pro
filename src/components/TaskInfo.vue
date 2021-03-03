@@ -178,9 +178,12 @@ select {
   border: none;
   background-color: black;
   font-family: 'Jost', sans-serif;
-  font-weight: bold;
   font-size: 1em;
+  font-weight: bold;
   color: inherit;
+  width: 10em;
+  text-align: center;
+
 }
 
 select option {
