@@ -10,6 +10,10 @@ A web app that helps the user to be more productive and have fun at the same tim
 - Matthew Percy
 - Ruben Roso Hui
 
+## Screenshots
+### Tasks Page
+![](screenshots/tasks.png)
+
 ## Project setup
 
 ### Install dependencies.
