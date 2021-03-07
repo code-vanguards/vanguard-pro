@@ -118,7 +118,7 @@ export default {
   },
   mounted() {
     setInterval(() => {
-      console.log('Reseting number of completed tasks today...');
+      console.log("It's a new day! Resetting number of completed tasks today:");
       console.log(`Old: ${this.completedTasksToday}`);
       this.completedTasksToday = 0;
       console.log(`New: ${this.completedTasksToday}`);
