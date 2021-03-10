@@ -7,7 +7,7 @@ The demonstration video can be found [here](https://www.youtube.com/watch?v=3Iv2
 
 ## Developers
 - Brian Kong
-- Foster Hangdaan
+- [Foster Hangdaan](https://wwww.fosterhangdaan.com)
 - Mark Brierley
 - Matthew Percy
 - Ruben Roso Hui
