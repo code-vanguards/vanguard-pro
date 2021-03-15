@@ -26,7 +26,7 @@ export default {
         let delta = now.getTime() - this.streak[0].getTime();
         if (delta > oneDay) {
           console.log('You lost your streak!');
-          this.streak = [];
+          this.streak = [new Date()];
         } else {
           console.log('You keep your streak!');
           this.streak.unshift(now);

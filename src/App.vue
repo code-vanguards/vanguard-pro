@@ -122,7 +122,7 @@ export default {
       console.log(`Old: ${this.completedTasksToday}`);
       this.completedTasksToday = 0;
       console.log(`New: ${this.completedTasksToday}`);
-    }, 15 * 1000);
+    }, 86400000);
   },
 };
 </script>
